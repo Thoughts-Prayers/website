@@ -41,12 +41,30 @@
       font-weight: 600;
     }
     blockquote {
-      font-style: italic;
       background: #f1f3f6;
       border-left: 4px solid #1a237e;
-      padding: 1rem;
+      border-radius: 6px;
+      padding: 1.5rem;
       margin: 2rem 0;
       color: #444;
+      text-align: center;
+    }
+    blockquote .verse {
+      font-size: 1.4rem;
+      font-style: italic;
+      margin: 0 0 0.5rem;
+      position: relative;
+    }
+    blockquote .verse::before {
+      content: "✝ ";
+      color: #1a237e;
+      font-weight: bold;
+    }
+    blockquote cite {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1a237e;
     }
     footer {
       background-color: #eee;
@@ -80,7 +98,8 @@
     </p>
 
     <blockquote>
-      “Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.” — Colossians 3:23
+      <p class="verse">“Your word is a lamp to my feet and a light to my path.”</p>
+      <cite>— Psalm 119:105</cite>
     </blockquote>
   </main>
 
