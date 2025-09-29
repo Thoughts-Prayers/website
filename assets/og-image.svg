@@ -1,20 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
-  <!-- Teal background -->
+  <!-- Gold background -->
   <rect width="1200" height="630" fill="#DAA520"/>
 
   <!-- Cross -->
-  <text x="50%" y="42%" text-anchor="middle" fill="#ffffff"
-        font-family="Inter, sans-serif" font-size="120" font-weight="700">✝</text>
+  <text x="50%" y="34%" text-anchor="middle" fill="#ffffff"
+        font-family="Inter, sans-serif" font-size="170" font-weight="700">✝</text>
 
-  <!-- Title (escape the ampersand) -->
-  <text x="50%" y="58%" text-anchor="middle" fill="#ffffff"
-        font-family="Inter, sans-serif" font-size="60" font-weight="700">
-    Thoughts &amp; Prayers Foundation
+  <!-- Title (stacked with spacing + tighter letter spacing) -->
+  <text x="50%" y="52%" text-anchor="middle" fill="#ffffff"
+        font-family="Inter, sans-serif" font-size="80" font-weight="700" letter-spacing="-1">
+    Thoughts &amp; Prayers
+  </text>
+  <text x="50%" y="66%" text-anchor="middle" fill="#ffffff"
+        font-family="Inter, sans-serif" font-size="80" font-weight="700" letter-spacing="-1">
+    Foundation
   </text>
 
-  <!-- Subtitle -->
-  <text x="50%" y="70%" text-anchor="middle" fill="#ffffff"
-        font-family="Inter, sans-serif" font-size="32" font-weight="400">
+  <!-- Subtitle (slightly larger for legibility) -->
+  <text x="50%" y="82%" text-anchor="middle" fill="#ffffff"
+        font-family="Inter, sans-serif" font-size="48" font-weight="400">
     Faith through play, hope through story
   </text>
 </svg>
