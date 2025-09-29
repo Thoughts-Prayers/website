@@ -1,10 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <!-- Deep blue background with rounded corners -->
-  <rect width="512" height="512" fill="#1a237e" rx="100" ry="100"/>
-
-  <!-- White cross -->
+  <rect width="512" height="512" fill="#00695c" rx="100" ry="100"/>
   <text x="50%" y="58%" text-anchor="middle" fill="#ffffff"
-        font-family="Inter, sans-serif" font-size="220" font-weight="700">
-    ✝
-  </text>
+        font-family="Inter, sans-serif" font-size="220" font-weight="700">✝</text>
 </svg>
