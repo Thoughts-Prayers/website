@@ -114,6 +114,44 @@
       color: var(--highlight);
     }
 
+    .button-container {
+      margin: 3rem auto 0;
+      text-align: center;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 0.85rem 1.8rem;
+      border-radius: 999px;
+      background-color: var(--highlight);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+    .cta-button:focus,
+    .cta-button:hover {
+      background-color: var(--highlight-dark);
+      transform: translateY(-1px);
+    }
+    .games-section {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+    .games-section h2 {
+      margin-top: 0;
+      color: var(--highlight);
+      font-weight: 700;
+    }
+    .games-section p {
+      margin-bottom: 2rem;
+      color: #444;
+    }
+
     footer {
       background-color: #eee;
       text-align: center;
@@ -148,6 +186,21 @@
         background-color: #1a1a1a;
         color: #aaa;
       }
+      .cta-button {
+        color: #111;
+      }
+      .cta-button:focus,
+      .cta-button:hover {
+        color: #111;
+        background-color: var(--highlight-light);
+      }
+      .games-section {
+        background-color: #171717;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+      }
+      .games-section p {
+        color: #ddd;
+      }
     }
   </style>
 </head>
@@ -158,6 +211,14 @@
   </header>
 
   <main>
+    <section class="games-section">
+      <h2>Games</h2>
+      <p>Discover experiences that nourish the soul. Start with <em>Our Daily Bread</em>, a contemplative picture puzzle inviting you to pause and reflect on Scripture each day.</p>
+      <div class="button-container">
+        <a class="cta-button" href="/our-daily-bread/">Play Our Daily Bread</a>
+      </div>
+    </section>
+
     <h2>Our Mission</h2>
     <p>
       The Thoughts & Prayers Foundation is a nonprofit public benefit corporation
@@ -176,6 +237,7 @@
       <p class="verse">“Your word is a lamp to my feet and a light to my path.”</p>
       <cite>— Psalm 119:105</cite>
     </blockquote>
+
   </main>
 
   <footer>

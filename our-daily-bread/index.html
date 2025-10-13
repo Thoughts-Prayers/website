@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daily Picture Puzzle</title>
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="title">Daily Picture Puzzle</div>
+    <div class="hud">
+      Moves: <span id="moves">0</span>
+      <span id="status" class="status" aria-live="polite"></span>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div id="puzzle" aria-label="Picture puzzle" role="application"></div>
+  </main>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

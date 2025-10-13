@@ -1,0 +1,121 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #111;
+  color: #eee;
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header, .app-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.hud {
+  font-size: 1rem;
+}
+
+.status {
+  margin-left: 1rem;
+  min-height: 1em;
+  display: inline-block;
+  font-weight: 600;
+  color: #81c784;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.status.is-solved {
+  opacity: 1;
+}
+
+.app-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#puzzle {
+  position: relative;
+  user-select: none;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.tile {
+  position: absolute;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: left 0.2s ease, top 0.2s ease;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tile.selected {
+  outline: 3px solid #4e9af1;
+  z-index: 2;
+}
+
+.tile.locked {
+  cursor: default;
+  outline: 2px solid rgba(129, 199, 132, 0.85);
+  z-index: 1;
+}
+
+.puzzle-solved .tile.locked {
+  outline: none;
+}
+
+.tile.jiggle {
+  animation: tile-jiggle 0.36s ease;
+}
+
+button {
+  background: #333;
+  color: #eee;
+  border: 1px solid #555;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #444;
+}
+
+@keyframes tile-jiggle {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  20% {
+    transform: translate3d(-3px, 0, 0);
+  }
+  40% {
+    transform: translate3d(3px, 0, 0);
+  }
+  60% {
+    transform: translate3d(-3px, 0, 0);
+  }
+  80% {
+    transform: translate3d(3px, 0, 0);
+  }
+}
