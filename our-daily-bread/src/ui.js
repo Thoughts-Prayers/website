@@ -3,31 +3,16 @@ const habitEl = document.getElementById('habit-cta');
 const shareBtn = document.getElementById('share');
 const shareContainer = document.querySelector('.share-actions');
 const shareDefaultLabel = shareBtn ? (shareBtn.textContent || 'Share results') : 'Share results';
-const devMenu = document.getElementById('dev-menu');
-const devMenuCloseBtn = document.getElementById('dev-menu-close');
+const footerEl = document.querySelector('.app-footer');
 let shareMessage = '';
 let shareResetTimer = null;
-let twoFingerTapCount = 0;
-let twoFingerTapTimer = null;
-let gesturesBound = false;
+let resetAction = null;
+let resetPending = false;
+let lastFooterTapTime = 0;
+const DOUBLE_TAP_WINDOW = 320;
 
 export function wireUI({ onReset, onSolve }) {
-  const resetBtn = document.getElementById('reset');
-  if (resetBtn && typeof onReset === 'function') {
-    resetBtn.addEventListener('click', () => {
-      resetBtn.blur();
-
-      const result = onReset();
-      hideDevMenu();
-      if (result && typeof result.then === 'function') {
-        resetBtn.disabled = true;
-        result.finally(() => {
-          resetBtn.disabled = false;
-          hideDevMenu();
-        });
-      }
-    });
-  }
+  resetAction = (typeof onReset === 'function') ? onReset : null;
 
   if (shareBtn) {
     shareBtn.disabled = true;
@@ -91,14 +76,8 @@ export function wireUI({ onReset, onSolve }) {
     document.addEventListener('keydown', handleKeydown);
   }
 
-  if (!gesturesBound && devMenu) {
-    gesturesBound = true;
-    document.addEventListener('touchstart', handleTwoFingerTap, { passive: true });
-    document.addEventListener('keydown', handleDevKeydown);
-  }
-
-  if (devMenuCloseBtn) {
-    devMenuCloseBtn.addEventListener('click', hideDevMenu);
+  if (footerEl) {
+    footerEl.addEventListener('touchend', handleFooterTouchEnd, { passive: true });
   }
 }
 
@@ -126,7 +105,6 @@ export function resetSolvedUI() {
     habitEl.classList.remove('is-visible');
   }
   setShareResult('');
-  hideDevMenu();
 }
 
 export function setShareResult(text) {
@@ -138,57 +116,39 @@ export function setShareResult(text) {
   }
   shareBtn.textContent = shareDefaultLabel;
   shareBtn.disabled = !shareMessage;
+  if (!shareMessage) {
+    shareBtn.tabIndex = -1;
+  } else {
+    shareBtn.tabIndex = 0;
+  }
   if (shareContainer) {
-    shareContainer.hidden = !shareMessage;
+    const isVisible = Boolean(shareMessage);
+    shareContainer.hidden = !isVisible;
+    shareContainer.classList.toggle('is-visible', isVisible);
   }
 }
 
-function handleTwoFingerTap(event) {
-  if (event.touches.length !== 2) return;
-
-  twoFingerTapCount += 1;
-  if (twoFingerTapTimer) {
-    clearTimeout(twoFingerTapTimer);
-    twoFingerTapTimer = null;
+function handleFooterTouchEnd(event) {
+  if (!event || !resetAction || resetPending) return;
+  if (event.touches && event.touches.length > 0) return;
+  if (event.changedTouches && event.changedTouches.length !== 1) return;
+  const now = Date.now();
+  const sinceLast = now - lastFooterTapTime;
+  if (sinceLast > 40 && sinceLast <= DOUBLE_TAP_WINDOW) {
+    triggerReset();
+    lastFooterTapTime = 0;
+  } else {
+    lastFooterTapTime = now;
   }
-
-  if (twoFingerTapCount >= 2) {
-    toggleDevMenu();
-    twoFingerTapCount = 0;
-    return;
-  }
-
-  twoFingerTapTimer = window.setTimeout(() => {
-    twoFingerTapCount = 0;
-    twoFingerTapTimer = null;
-  }, 350);
 }
 
-function handleDevKeydown(event) {
-  if (event.defaultPrevented) return;
-  if (event.metaKey || event.ctrlKey || event.altKey) return;
-  if (typeof event.key !== 'string') return;
-  if (event.key.toLowerCase() !== 'd') return;
-  toggleDevMenu();
-}
-
-function toggleDevMenu(force) {
-  if (!devMenu) return;
-  twoFingerTapCount = 0;
-  if (twoFingerTapTimer) {
-    clearTimeout(twoFingerTapTimer);
-    twoFingerTapTimer = null;
-  }
-  const shouldShow = typeof force === 'boolean' ? force : devMenu.hidden;
-  devMenu.hidden = !shouldShow;
-}
-
-function hideDevMenu() {
-  if (!devMenu || devMenu.hidden) return;
-  devMenu.hidden = true;
-  twoFingerTapCount = 0;
-  if (twoFingerTapTimer) {
-    clearTimeout(twoFingerTapTimer);
-    twoFingerTapTimer = null;
+function triggerReset() {
+  if (!resetAction || resetPending) return;
+  const result = resetAction();
+  if (result && typeof result.then === 'function') {
+    resetPending = true;
+    result.finally(() => {
+      resetPending = false;
+    });
   }
 }
