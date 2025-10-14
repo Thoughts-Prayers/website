@@ -5,6 +5,52 @@ import { createPuzzle } from './puzzle-engine.js';
 import { getMoves, setMoves } from './state.js';
 import { wireUI, setMovesUI, showSolved, resetSolvedUI } from './ui.js';
 
+const BUILD_VERSION = '20250212';
+const VERSION_STORAGE_KEY = 'odb-build-version';
+
+function ensureFreshCache() {
+  if (typeof window === 'undefined') return;
+
+  let previous = null;
+  try {
+    previous = window.localStorage.getItem(VERSION_STORAGE_KEY);
+  } catch (err) {
+    // ignore storage access issues (private mode, etc.)
+  }
+
+  if (previous === BUILD_VERSION) return;
+
+  if (previous !== null) {
+    if ('caches' in window) {
+      caches.keys()
+        .then(keys => Promise.all(keys.map(key => caches.delete(key))))
+        .catch(() => {});
+    }
+
+    const { serviceWorker } = window.navigator;
+    if (serviceWorker && typeof serviceWorker.getRegistrations === 'function') {
+      serviceWorker.getRegistrations()
+        .then(registrations => {
+          registrations.forEach(reg => {
+            reg.update?.();
+            if (reg.waiting && typeof reg.waiting.postMessage === 'function') {
+              reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+            }
+          });
+        })
+        .catch(() => {});
+    }
+  }
+
+  try {
+    window.localStorage.setItem(VERSION_STORAGE_KEY, BUILD_VERSION);
+  } catch (err) {
+    // best effort only
+  }
+}
+
+ensureFreshCache();
+
 function imageFor(dayIndex) {
   if (IMAGES && IMAGES.length) return `./assets/images/${IMAGES[dayIndex]}`;
   if (dayIndex < 0 || dayIndex >= IMAGE_COUNT) return null;
