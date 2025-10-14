@@ -2,7 +2,7 @@ import { START_DATE, GRID_SIZE, IMAGES, IMAGE_DIR, IMAGE_COUNT } from './config.
 import { todayLocal, daysSince } from './date-utils.js';
 import { makeRng } from './rng.js';
 import { createPuzzle } from './puzzle-engine.js';
-import { getMoves, setMoves, clearMoves } from './state.js';
+import { setMoves, clearMoves } from './state.js';
 import { wireUI, setMovesUI, showSolved, resetSolvedUI } from './ui.js';
 
 const BUILD_VERSION = '20250212';
@@ -61,39 +61,59 @@ function imageFor(dayIndex) {
 let currentDate = todayLocal();
 let moves = 0;
 let puzzleApi = null;
+let container = null;
+let dayIndex = 0;
+let imageUrl = null;
+let isBuilding = false;
+
+async function createOrResetPuzzle() {
+  if (!container || !imageUrl || isBuilding) return;
+  isBuilding = true;
+
+  try {
+    puzzleApi?.teardown?.();
+    clearMoves(currentDate);
+    moves = 0;
+    setMovesUI(moves);
+    setMoves(currentDate, moves);
+    resetSolvedUI();
+
+    const rng = makeRng(dayIndex);
+    puzzleApi = await createPuzzle({
+      container,
+      imageUrl,
+      gridSize: GRID_SIZE,
+      rng,
+      onMove: () => {
+        moves += 1;
+        setMovesUI(moves);
+        setMoves(currentDate, moves);
+        window.navigator?.vibrate?.(10);
+      },
+      onSolved: () => {
+        showSolved(moves);
+      }
+    });
+  } finally {
+    isBuilding = false;
+  }
+}
 
 async function boot() {
-  const dayIndex = daysSince(START_DATE, currentDate);
-  const img = imageFor(dayIndex);
-  const container = document.getElementById('puzzle');
-  if (!img) {
+  dayIndex = daysSince(START_DATE, currentDate);
+  imageUrl = imageFor(dayIndex);
+  container = document.getElementById('puzzle');
+  if (!container) return;
+
+  if (!imageUrl) {
     container.textContent = 'No puzzle today.';
     return;
   }
-  const rng = makeRng(dayIndex);
 
-  clearMoves(currentDate);
-  moves = getMoves(currentDate) || 0;
-  setMovesUI(moves);
-  resetSolvedUI();
-
-  puzzleApi = await createPuzzle({
-    container,
-    imageUrl: img,
-    gridSize: GRID_SIZE,
-    rng,
-    onMove: () => {
-      moves += 1;
-      setMovesUI(moves);
-      setMoves(currentDate, moves);
-      window.navigator?.vibrate?.(10);
-    },
-    onSolved: () => {
-      showSolved(moves);
-    }
-  });
+  await createOrResetPuzzle();
 
   wireUI({
+    onReset: () => createOrResetPuzzle(),
     onSolve: () => {
       puzzleApi?.solveNext?.();
     }

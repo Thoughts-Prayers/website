@@ -4,7 +4,19 @@ const habitEl = document.getElementById('habit-cta');
 export function wireUI({ onReset, onSolve }) {
   const resetBtn = document.getElementById('reset');
   if (resetBtn && typeof onReset === 'function') {
-    resetBtn.addEventListener('click', onReset);
+    resetBtn.addEventListener('click', () => {
+      const menuRoot = resetBtn.closest('details');
+      if (menuRoot) menuRoot.open = false;
+      resetBtn.blur();
+
+      const result = onReset();
+      if (result && typeof result.then === 'function') {
+        resetBtn.disabled = true;
+        result.finally(() => {
+          resetBtn.disabled = false;
+        });
+      }
+    });
   }
 
   if (typeof onSolve === 'function') {
