@@ -3,21 +3,38 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Daily Picture Puzzle</title>
+  <title>Our Daily Bread • Thoughts & Prayers Foundation</title>
+  <meta name="description" content="Play Our Daily Bread, the daily picture puzzle from the Thoughts & Prayers Foundation." />
+  <meta name="theme-color" content="#DAA520" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/main.css" />
 </head>
 <body>
   <header class="app-header">
-    <div class="title">Daily Picture Puzzle</div>
+    <div class="branding">
+      <a class="home-link" href="/">Thoughts &amp; Prayers Foundation</a>
+      <h1>Our Daily Bread</h1>
+      <p class="tagline">A contemplative picture puzzle to start your day with Scripture.</p>
+    </div>
     <div class="hud">
-      Moves: <span id="moves">0</span>
+      <span class="hud-label">Moves</span>
+      <span id="moves" class="hud-value">0</span>
       <span id="status" class="status" aria-live="polite"></span>
     </div>
   </header>
 
   <main class="app-main">
-    <div id="puzzle" aria-label="Picture puzzle" role="application"></div>
+    <div class="puzzle-frame">
+      <div id="puzzle" aria-label="Picture puzzle" role="application"></div>
+    </div>
   </main>
+
+  <footer class="app-footer">
+    <p>&copy; 2025 Thoughts &amp; Prayers Foundation, Inc.</p>
+  </footer>
 
   <script type="module" src="./src/main.js"></script>
 </body>

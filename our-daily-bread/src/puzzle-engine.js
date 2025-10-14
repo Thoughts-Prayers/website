@@ -22,6 +22,12 @@ export async function createPuzzle(opts) {
     const j = Math.floor(rng() * (i + 1));
     [perm[i], perm[j]] = [perm[j], perm[i]];
   }
+  if (!perm.some((value, idx) => value === idx)) {
+    // Guarantee at least one fixed point so the puzzle starts with a reassuring anchor.
+    const destToFix = Math.floor(rng() * N);
+    const currentIndex = perm.indexOf(destToFix);
+    [perm[destToFix], perm[currentIndex]] = [perm[currentIndex], perm[destToFix]];
+  }
 
   // destIndex -> tile
   const slots = new Array(N);
