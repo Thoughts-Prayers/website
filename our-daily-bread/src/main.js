@@ -76,7 +76,7 @@ function formatPuzzleLabel(index) {
 
 function formatShareText(moveCount) {
   const movesLabel = moveCount === 1 ? 'move' : 'moves';
-  return `I solved Our Daily Bread 🖼️ ${puzzleLabel} in ${moveCount} ${movesLabel}.\n${SHARE_URL}`;
+  return `${SHARE_URL}\nI solved Our Daily Bread 🖼️ ${puzzleLabel} in ${moveCount} ${movesLabel}.`;
 }
 
 async function createOrResetPuzzle() {
