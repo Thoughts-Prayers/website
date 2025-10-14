@@ -6,7 +6,7 @@
   <title>Thoughts & Prayers Foundation</title>
 
   <!-- SEO basics -->
-  <meta name="description" content="Faith-filled games that point people to Jesus — inspiring hope, building community, and encouraging spiritual growth.">
+  <meta name="description" content="Playful journeys that stir hope, faith, and wonder — building community and encouraging spiritual growth.">
   <link rel="canonical" href="https://thoughtsandprayersfoundation.org/">
   <meta name="theme-color" content="#DAA520">
   <meta name="color-scheme" content="light dark">
@@ -14,7 +14,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Thoughts & Prayers Foundation">
-  <meta property="og:description" content="Faith-filled games that point people to Jesus — inspiring hope, building community, and encouraging spiritual growth.">
+  <meta property="og:description" content="Playful journeys that stir hope, faith, and wonder — building community and encouraging spiritual growth.">
   <meta property="og:url" content="https://thoughtsandprayersfoundation.org/">
   <meta property="og:site_name" content="Thoughts & Prayers Foundation">
   <meta property="og:image" content="https://thoughtsandprayersfoundation.org/assets/og-image.png?v=20250929">
@@ -27,7 +27,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Thoughts & Prayers Foundation">
-  <meta name="twitter:description" content="Faith-filled games that point people to Jesus — inspiring hope, building community, and encouraging spiritual growth.">
+  <meta name="twitter:description" content="Playful journeys that stir hope, faith, and wonder — building community and encouraging spiritual growth.">
   <meta name="twitter:image" content="https://thoughtsandprayersfoundation.org/assets/og-image.png?v=20250929">
   <meta name="twitter:image:alt" content="✝︎ Thoughts & Prayers Foundation — Sharing Christ’s love through interactive experiences">
 
@@ -47,7 +47,7 @@
     "name":"Thoughts & Prayers Foundation",
     "url":"https://thoughtsandprayersfoundation.org/",
     "logo":"https://thoughtsandprayersfoundation.org/assets/logo-512.png",
-    "description":"Faith-filled games that point people to Jesus — inspiring hope, building community, and encouraging spiritual growth."
+    "description":"Playful journeys that stir hope, faith, and wonder — building community and encouraging spiritual growth."
   }
   </script>
 
@@ -115,14 +115,18 @@
     }
 
     .button-container {
-      margin: 3rem auto 0;
-      text-align: center;
+      margin: 1.75rem 0 2.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 1rem;
     }
     .cta-button {
       display: inline-block;
       padding: 0.85rem 1.8rem;
       border-radius: 999px;
       background-color: var(--highlight);
+      border: 2px solid transparent;
       color: #fff;
       text-decoration: none;
       font-weight: 600;
@@ -134,21 +138,8 @@
       background-color: var(--highlight-dark);
       transform: translateY(-1px);
     }
-    .games-section {
-      background-color: #fff;
-      border-radius: 12px;
-      padding: 2rem 1.5rem;
-      margin: 2.5rem 0;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      text-align: center;
-    }
-    .games-section h2 {
-      margin-top: 0;
-      color: var(--highlight);
-      font-weight: 700;
-    }
-    .games-section p {
-      margin-bottom: 2rem;
+    .games-intro {
+      margin: 0 0 1rem;
       color: #444;
     }
 
@@ -194,12 +185,11 @@
         color: #111;
         background-color: var(--highlight-light);
       }
-      .games-section {
-        background-color: #171717;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
-      }
-      .games-section p {
+      .games-intro {
         color: #ddd;
+      }
+      .button-container {
+        justify-content: flex-start;
       }
     }
   </style>
@@ -207,30 +197,34 @@
 <body>
   <header>
     <h1><span class="cross">✝︎</span> Thoughts &amp; Prayers Foundation</h1>
-    <p>Faith-filled games that point people to Jesus</p>
+    <p>Playful journeys that stir hope, faith, and wonder</p>
   </header>
 
   <main>
-    <section class="games-section">
-      <h2>Games</h2>
-      <p>Discover experiences that nourish the soul. Start with <em>Our Daily Bread</em>, a contemplative picture puzzle inviting you to pause and reflect on Scripture each day.</p>
-      <div class="button-container">
-        <a class="cta-button" href="/our-daily-bread/">Play Our Daily Bread</a>
-      </div>
-    </section>
+    <h2>Games</h2>
+    <p class="games-intro">
+      Discover experiences that nourish the soul. Start with <em>Our Daily Bread</em>,
+      a contemplative picture puzzle inviting you to pause and reflect on Scripture each day.
+    </p>
+    <div class="button-container">
+      <a class="cta-button" href="/our-daily-bread/">Play Our Daily Bread</a>
+    </div>
 
     <h2>Our Mission</h2>
     <p>
       The Thoughts & Prayers Foundation is a nonprofit public benefit corporation
-      dedicated to creating <strong>faith-filled games that point people to Jesus</strong> —
-      inspiring hope, building community, and encouraging players to grow in their relationship with Him.
+      dedicated to creating <strong>playful journeys that stir hope, faith, and wonder</strong> —
+      building community and encouraging players to grow in their relationship with Him.
     </p>
+    <div class="button-container">
+      <a class="cta-button" href="https://secure.givelively.org/donate/thoughts-prayers-foundation-inc" target="_blank" rel="noopener">Donate</a>
+    </div>
 
     <h2>About Us</h2>
     <p>
-      We believe in the power of story and technology to share <strong>the love of Jesus</strong> in fresh, creative ways.
-      Guided by the values of service, community, and imagination, we design interactive experiences
-      that help people walk with Jesus every day and discover the joy of faith through play.
+      We love weaving story and technology together to share <strong>the love of Jesus</strong> in surprising, joy-filled ways.
+      With service, community, and imagination as our compass, we craft interactive adventures
+      that invite you to walk with Him each day and rediscover the delight of faith through play.
     </p>
 
     <blockquote>

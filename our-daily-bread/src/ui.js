@@ -5,8 +5,6 @@ export function wireUI({ onReset, onSolve }) {
   const resetBtn = document.getElementById('reset');
   if (resetBtn && typeof onReset === 'function') {
     resetBtn.addEventListener('click', () => {
-      const menuRoot = resetBtn.closest('details');
-      if (menuRoot) menuRoot.open = false;
       resetBtn.blur();
 
       const result = onReset();
