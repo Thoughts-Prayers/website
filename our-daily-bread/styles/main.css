@@ -311,6 +311,9 @@ a:focus {
   border-radius: 0;
   box-shadow: none;
 }
+.tile.locked::after {
+  content: none !important;
+}
 
 .tile.jiggle {
   animation: tile-jiggle 0.36s ease;
