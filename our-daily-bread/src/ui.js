@@ -1,4 +1,5 @@
 const statusEl = document.getElementById('status');
+const habitEl = document.getElementById('habit-cta');
 
 export function wireUI({ onReset, onSolve }) {
   const resetBtn = document.getElementById('reset');
@@ -36,10 +37,18 @@ export function showSolved(n) {
   if (!statusEl) return;
   statusEl.textContent = `Solved in ${n} moves! 🎉`;
   statusEl.classList.add('is-solved');
+  if (habitEl) {
+    habitEl.hidden = false;
+    habitEl.classList.add('is-visible');
+  }
 }
 
 export function resetSolvedUI() {
   if (!statusEl) return;
   statusEl.textContent = '';
   statusEl.classList.remove('is-solved');
+  if (habitEl) {
+    habitEl.hidden = true;
+    habitEl.classList.remove('is-visible');
+  }
 }

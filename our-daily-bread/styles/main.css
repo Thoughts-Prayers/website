@@ -125,6 +125,7 @@ a:focus {
 .app-main {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 3rem 1.5rem;
@@ -140,6 +141,23 @@ a:focus {
   justify-content: center;
   width: min(92vw, 540px);
   min-height: min(92vw, 540px);
+}
+
+#habit-cta {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--highlight-dark);
+  margin: 0 0 1.75rem;
+  text-align: center;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#habit-cta.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 #puzzle {
@@ -167,29 +185,8 @@ a:focus {
 .tile.locked {
   cursor: default;
   z-index: 1;
-  box-shadow: 0 3px 12px rgba(13, 29, 54, 0.12);
-}
-
-.tile.locked::after {
-  content: '✓';
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: 999px;
-  background: var(--highlight-light);
-  color: #3a2c00;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  font-weight: 700;
-}
-
-.puzzle-solved .tile.locked::after {
-  display: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .tile.jiggle {
@@ -262,6 +259,10 @@ button:focus-visible {
     min-height: min(100vw - 2.5rem, 440px);
     padding: 1.2rem;
   }
+  #habit-cta {
+    font-size: 1.05rem;
+    margin: 0 0 1.4rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -296,6 +297,10 @@ button:focus-visible {
     padding: 1rem;
     border-radius: 16px;
   }
+  #habit-cta {
+    font-size: 1rem;
+    margin: 0 0 1.2rem;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -326,15 +331,8 @@ button:focus-visible {
     border: 1px solid rgba(255, 255, 255, 0.07);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
   }
-  .tile.locked {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-  }
   .tile.selected {
     outline: 3px solid var(--highlight-light);
-  }
-  .tile.locked::after {
-    background: var(--highlight-light);
-    color: #111;
   }
   .app-footer {
     background: #1a1a1a;
@@ -348,5 +346,8 @@ button:focus-visible {
   button:focus-visible {
     background: var(--highlight-light);
     color: #111;
+  }
+  #habit-cta {
+    color: var(--highlight-light);
   }
 }
