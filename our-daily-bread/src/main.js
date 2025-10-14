@@ -2,7 +2,7 @@ import { START_DATE, GRID_SIZE, IMAGES, IMAGE_DIR, IMAGE_COUNT } from './config.
 import { todayLocal, daysSince } from './date-utils.js';
 import { makeRng } from './rng.js';
 import { createPuzzle } from './puzzle-engine.js';
-import { getMoves, setMoves } from './state.js';
+import { getMoves, setMoves, clearMoves } from './state.js';
 import { wireUI, setMovesUI, showSolved, resetSolvedUI } from './ui.js';
 
 const BUILD_VERSION = '20250212';
@@ -72,6 +72,7 @@ async function boot() {
   }
   const rng = makeRng(dayIndex);
 
+  clearMoves(currentDate);
   moves = getMoves(currentDate) || 0;
   setMovesUI(moves);
   resetSolvedUI();
