@@ -1,0 +1,14 @@
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/our-daily-bread/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/our-daily-bread/styles/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/our-daily-bread/src/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
