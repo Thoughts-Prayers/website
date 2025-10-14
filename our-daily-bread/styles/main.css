@@ -219,14 +219,17 @@ a:focus {
   margin: 0;
 }
 
-.app-reset {
-  padding: 0.4rem 1rem 2rem;
+.share-actions {
+  margin-top: 1.6rem;
   display: flex;
   justify-content: center;
+  padding: 0 1rem;
 }
 
-.app-reset button {
-  min-width: min(240px, 100%);
+.share-actions button {
+  min-width: min(320px, 100%);
+  padding: 0.9rem 2.4rem;
+  font-size: 1.05rem;
 }
 
 button {
@@ -246,6 +249,64 @@ button:focus-visible {
   color: #fff;
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(13, 29, 54, 0.2);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.dev-menu {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: min(280px, calc(100vw - 2rem));
+  background: rgba(10, 16, 27, 0.92);
+  color: #f5f5f5;
+  border-radius: 18px;
+  padding: 1.1rem 1.25rem 1.2rem;
+  box-shadow: 0 18px 45px rgba(13, 29, 54, 0.24);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  z-index: 40;
+}
+
+.dev-menu__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.dev-menu__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.dev-menu__actions button {
+  width: 100%;
+}
+
+.dev-menu__close {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f5f5f5;
+}
+
+.dev-menu__close:hover,
+.dev-menu__close:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.dev-menu__hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(245, 245, 245, 0.7);
 }
 
 @keyframes tile-jiggle {

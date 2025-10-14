@@ -33,14 +33,22 @@
     <div class="puzzle-frame">
       <div id="puzzle" aria-label="Picture puzzle" role="application"></div>
     </div>
+    <div class="share-actions" hidden>
+      <button type="button" id="share" disabled>Share results</button>
+    </div>
   </main>
 
   <footer class="app-footer">
     <p class="footer-copy">&copy; 2025 Thoughts &amp; Prayers Foundation, Inc.</p>
   </footer>
 
-  <div class="app-reset">
-    <button type="button" id="reset">Reset puzzle</button>
+  <div id="dev-menu" class="dev-menu" hidden>
+    <p class="dev-menu__title">Developer tools</p>
+    <div class="dev-menu__actions">
+      <button type="button" id="reset">Reset puzzle</button>
+      <button type="button" id="dev-menu-close" class="dev-menu__close">Close</button>
+    </div>
+    <p class="dev-menu__hint">Double-tap with two fingers to toggle.</p>
   </div>
 
   <script type="module" src="./src/main.js"></script>
