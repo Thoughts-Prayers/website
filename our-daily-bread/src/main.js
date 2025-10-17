@@ -1,4 +1,4 @@
-import { START_DATE, GRID_SIZE, IMAGES, IMAGE_DIR, IMAGE_COUNT } from './config.js';
+import { START_DATE, GRID_SIZE, IMAGES, IMAGE_DIR } from './config.js';
 import { todayLocal, daysSince } from './date-utils.js';
 import { makeRng } from './rng.js';
 import { createPuzzle } from './puzzle-engine.js';
@@ -52,10 +52,19 @@ function ensureFreshCache() {
 ensureFreshCache();
 
 function imageFor(dayIndex) {
-  if (IMAGES && IMAGES.length) return `./assets/images/${IMAGES[dayIndex]}`;
-  if (dayIndex < 0 || dayIndex >= IMAGE_COUNT) return null;
+  if (dayIndex < 0) return null;
+  if (IMAGES && IMAGES.length) {
+    const imageName = IMAGES[dayIndex];
+    return imageName ? `${IMAGE_DIR}/${imageName}` : null;
+  }
   const name = String(dayIndex + 1).padStart(2,'0');
   return `${IMAGE_DIR}/${name}.jpg`;
+}
+
+function fallbackImageUrl() {
+  const fallbackName = (IMAGES && IMAGES.length) ? IMAGES[0] : '01.jpg';
+  if (!fallbackName) return null;
+  return `${IMAGE_DIR}/${fallbackName}`;
 }
 
 let currentDate = todayLocal();
@@ -92,9 +101,37 @@ async function createOrResetPuzzle() {
     resetSolvedUI();
 
     const rng = makeRng(dayIndex);
+    const built = await tryBuildPuzzle(imageUrl, rng);
+    if (built) return;
+
+    const fallbackUrl = fallbackImageUrl();
+    if (fallbackUrl && fallbackUrl !== imageUrl) {
+      console.warn('Retrying puzzle build with fallback image', fallbackUrl);
+      const fallbackBuilt = await tryBuildPuzzle(fallbackUrl, rng);
+      if (fallbackBuilt) {
+        imageUrl = fallbackUrl;
+        return;
+      }
+    }
+
+    showMissingPuzzle();
+  } finally {
+    isBuilding = false;
+  }
+}
+
+function showMissingPuzzle() {
+  puzzleApi = null;
+  container.textContent = 'No puzzle today.';
+  setShareResult('');
+}
+
+async function tryBuildPuzzle(url, rng) {
+  if (!url) return false;
+  try {
     puzzleApi = await createPuzzle({
       container,
-      imageUrl,
+      imageUrl: url,
       gridSize: GRID_SIZE,
       rng,
       onMove: () => {
@@ -108,8 +145,10 @@ async function createOrResetPuzzle() {
         setShareResult(formatShareText(moves));
       }
     });
-  } finally {
-    isBuilding = false;
+    return true;
+  } catch (err) {
+    console.error('Failed to build puzzle for', url, err);
+    return false;
   }
 }
 
