@@ -1,4 +1,4 @@
-export const START_DATE = '2025-10-13';   // YYYY-MM-DD
+export const START_DATE = '2025-10-17';   // YYYY-MM-DD
 export const DEFAULT_GRID_SIZE = 4;                 // NxN
 export const GRID_SIZE_OPTIONS = [
   { value: 3, label: 'Easy (3x3)' },
