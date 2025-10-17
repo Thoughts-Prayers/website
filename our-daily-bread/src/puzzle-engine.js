@@ -73,6 +73,9 @@ export async function createPuzzle(opts) {
   };
 
   layout();
+  requestAnimationFrame(() => {
+    flashAllLockedTiles();
+  });
 
   const teardownFns = [];
   const parent = container.parentElement;
@@ -100,7 +103,8 @@ export async function createPuzzle(opts) {
       e.preventDefault();
 
       if (tile.locked) {
-        triggerJiggle(tile);
+        jiggleAllLockedTiles();
+        flashAllLockedTiles();
         return;
       }
 
@@ -142,6 +146,7 @@ export async function createPuzzle(opts) {
     positionTile(tileB, tileSize, gridSize);
     updateLockState(tileA);
     updateLockState(tileB);
+    flashAllLockedTiles();
 
     if (countMove) onMove();
     setSolvedState(isSolved(slots));
@@ -173,6 +178,31 @@ export async function createPuzzle(opts) {
     const isLocked = tile.destIndex === tile.origIndex;
     tile.locked = isLocked;
     tile.el.classList.toggle('locked', isLocked);
+    tile.el.classList.toggle('misplaced', !isLocked);
+  }
+
+  function flashAllLockedTiles() {
+    tiles.forEach(tile => {
+      if (tile.locked) triggerCheckmark(tile.el);
+    });
+  }
+
+  function jiggleAllLockedTiles() {
+    tiles.forEach(tile => {
+      if (tile.locked) triggerJiggle(tile);
+    });
+  }
+
+  function triggerCheckmark(el) {
+    el.classList.remove('flash-check');
+    void el.offsetWidth;
+    el.classList.add('flash-check');
+    const handle = (event) => {
+      if (event.animationName === 'tile-checkmark') {
+        el.classList.remove('flash-check');
+      }
+    };
+    el.addEventListener('animationend', handle, { once: true });
   }
 
   function triggerJiggle(tile) {
