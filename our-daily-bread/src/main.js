@@ -5,7 +5,7 @@ import { createPuzzle } from './puzzle-engine.js';
 import { setMoves, clearMoves } from './state.js';
 import { wireUI, setMovesUI, showSolved, resetSolvedUI, setShareResult } from './ui.js';
 
-const BUILD_VERSION = '20250222';
+const BUILD_VERSION = '20250225';
 const VERSION_STORAGE_KEY = 'odb-build-version';
 const GRID_STORAGE_KEY = 'odb-grid-size';
 

@@ -176,9 +176,36 @@ a:focus {
 .puzzle-stage {
   position: relative;
   margin: 0 auto;
-  width: min(92vw, 600px);
+  width: 92vw;
+  max-width: 600px;
   display: flex;
   justify-content: center;
+}
+.puzzle-frame {
+  position: relative;
+  background: linear-gradient(160deg, rgba(245, 251, 255, 0.92) 0%, rgba(214, 233, 255, 0.86) 65%);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.8rem;
+  box-shadow: 0 32px 64px rgba(18, 65, 110, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 92vw;
+  max-width: 540px;
+  height: 92vw;
+  max-height: 540px;
+  z-index: 1;
+}
+@supports (width: min(100%, 1px)) {
+  .puzzle-stage {
+    width: min(92vw, 600px);
+  }
+  .puzzle-frame {
+    width: min(92vw, 540px);
+    height: auto;
+    min-height: min(92vw, 540px);
+  }
 }
 .puzzle-ornaments {
   position: absolute;
@@ -438,21 +465,6 @@ a:focus {
   background: radial-gradient(120% 120% at 50% 100%, rgba(181, 223, 255, 0.32), rgba(181, 223, 255, 0));
   pointer-events: none;
   animation: waveRise 32s ease-in-out infinite;
-}
-
-.puzzle-frame {
-  position: relative;
-  background: linear-gradient(160deg, rgba(245, 251, 255, 0.92) 0%, rgba(214, 233, 255, 0.86) 65%);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 1.8rem;
-  box-shadow: 0 32px 64px rgba(18, 65, 110, 0.22);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: min(92vw, 540px);
-  min-height: min(92vw, 540px);
-  z-index: 1;
 }
 
 .puzzle-frame::before {
@@ -807,8 +819,10 @@ button:disabled {
     padding: 2.2rem 1rem 2.6rem;
   }
   .puzzle-frame {
-    width: min(100%, 440px);
-    min-height: min(100vw - 2.5rem, 440px);
+    width: 100%;
+    max-width: 440px;
+    height: calc(100vw - 2.5rem);
+    max-height: 440px;
     padding: 1.2rem;
   }
   .puzzle-stage {
@@ -840,6 +854,15 @@ button:disabled {
     margin: 0 0 1.4rem;
   }
 }
+@supports (width: min(100%, 1px)) {
+  @media (max-width: 700px) {
+    .puzzle-frame {
+      width: min(100%, 440px);
+      min-height: min(100vw - 2.5rem, 440px);
+      height: auto;
+    }
+  }
+}
 
 @media (max-width: 480px) {
   .app-header {
@@ -868,8 +891,10 @@ button:disabled {
     padding: 2rem 0.85rem 2.4rem;
   }
   .puzzle-frame {
-    width: min(100%, 400px);
-    min-height: min(100vw - 2rem, 400px);
+    width: 100%;
+    max-width: 400px;
+    height: calc(100vw - 2rem);
+    max-height: 400px;
     padding: 1rem;
     border-radius: 16px;
   }
@@ -885,6 +910,15 @@ button:disabled {
   }
   .app-footer {
     padding: 1.2rem 0.8rem 1.4rem;
+  }
+}
+@supports (width: min(100%, 1px)) {
+  @media (max-width: 480px) {
+    .puzzle-frame {
+      width: min(100%, 400px);
+      min-height: min(100vw - 2rem, 400px);
+      height: auto;
+    }
   }
 }
 
