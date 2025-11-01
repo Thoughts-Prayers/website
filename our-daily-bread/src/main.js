@@ -89,6 +89,9 @@ let isBuilding = false;
 let rebuildQueued = false;
 let puzzleLabel = '';
 
+const puzzleLabelEl = (typeof document !== 'undefined') ? document.getElementById('puzzle-label') : null;
+const gridSizeLabelEl = (typeof document !== 'undefined') ? document.getElementById('grid-size-label') : null;
+
 const SHARE_URL = 'https://thoughtsandprayersfoundation.org/our-daily-bread/';
 
 function formatPuzzleLabel(index) {
@@ -99,6 +102,15 @@ function formatPuzzleLabel(index) {
 function formatShareText(moveCount) {
   const movesLabel = moveCount === 1 ? 'move' : 'moves';
   return `${SHARE_URL}\nI solved Our Daily Bread 🖼️ ${puzzleLabel} (${gridSize}x${gridSize}) in ${moveCount} ${movesLabel}.`;
+}
+
+function renderMetaLabels() {
+  if (puzzleLabelEl) {
+    puzzleLabelEl.textContent = puzzleLabel || '—';
+  }
+  if (gridSizeLabelEl) {
+    gridSizeLabelEl.textContent = `${gridSize}×${gridSize}`;
+  }
 }
 
 function normalizeGridSize(value) {
@@ -152,6 +164,7 @@ function setupDifficultyControl() {
   }
 
   select.value = String(gridSize);
+  renderMetaLabels();
 
   select.addEventListener('change', (event) => {
     const next = normalizeGridSize(event.target.value);
@@ -161,6 +174,7 @@ function setupDifficultyControl() {
     }
     gridSize = next;
     persistGridSizePreference(gridSize);
+    renderMetaLabels();
     resetSolvedUI();
     moves = 0;
     setMovesUI(moves);
@@ -251,6 +265,7 @@ async function boot() {
   imageUrl = imageFor(dayIndex);
   container = document.getElementById('puzzle');
   puzzleLabel = formatPuzzleLabel(dayIndex);
+  renderMetaLabels();
   setupDifficultyControl();
   if (!container) return;
 

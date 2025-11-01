@@ -19,15 +19,21 @@
   <meta name="twitter:image" content="https://thoughtsandprayersfoundation.org/our-daily-bread/assets/og-image.png?v=20250219" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/main.css" />
 </head>
 <body>
+  <div class="floating-bubbles" aria-hidden="true">
+    <span class="bubble bubble--one"></span>
+    <span class="bubble bubble--two"></span>
+    <span class="bubble bubble--three"></span>
+  </div>
   <header class="app-header">
     <div class="branding">
       <a class="home-link" href="/">Thoughts &amp; Prayers Foundation</a>
       <h1>Our Daily Bread</h1>
       <p class="tagline">A thoughtful picture puzzle to start your day with Scripture.</p>
+      <div class="tagline-wave" aria-hidden="true"></div>
     </div>
     <div class="header-actions">
       <div class="difficulty-control">
@@ -43,13 +49,50 @@
   </header>
 
   <main class="app-main">
+    <div class="puzzle-meta" aria-live="polite">
+      <div class="meta-card">
+        <span class="meta-label">Today's puzzle</span>
+        <span id="puzzle-label" class="meta-value">#00</span>
+      </div>
+      <div class="meta-card">
+        <span class="meta-label">Current grid</span>
+        <span id="grid-size-label" class="meta-value">4×4</span>
+      </div>
+    </div>
+
     <p id="habit-cta" class="habit-cta" hidden>Come back tomorrow for a fresh puzzle and fresh bread.</p>
-    <div class="puzzle-frame">
-      <div id="puzzle" aria-label="Picture puzzle" role="application"></div>
+    <div class="puzzle-stage">
+      <div class="puzzle-ornaments" aria-hidden="true">
+        <span class="ornament ornament--loaf">🍞</span>
+        <span class="ornament ornament--sparkle">✨</span>
+        <span class="ornament ornament--dove">🕊️</span>
+        <span class="ornament ornament--heart">💙</span>
+      </div>
+      <div class="puzzle-frame">
+        <div id="puzzle" aria-label="Picture puzzle" role="application"></div>
+      </div>
     </div>
     <div class="share-actions" hidden>
       <button type="button" id="share" disabled>Share results</button>
+      <p class="share-hint">Sharing copies your moves so you can celebrate with friends.</p>
     </div>
+    <section class="tip-deck" aria-label="How to play">
+      <article class="tip-card">
+        <span class="tip-icon" aria-hidden="true">🧩</span>
+        <h3 class="tip-title">Match every edge</h3>
+        <p class="tip-copy">Tap two letters to swap their places and stitch today’s artwork back together one move at a time.</p>
+      </article>
+      <article class="tip-card">
+        <span class="tip-icon" aria-hidden="true">⏱️</span>
+        <h3 class="tip-title">Come back daily</h3>
+        <p class="tip-copy">A new picture unlocks with every sunrise. Keep your streak and collect graceful scenes.</p>
+      </article>
+      <article class="tip-card">
+        <span class="tip-icon" aria-hidden="true">🤝</span>
+        <h3 class="tip-title">Share encouragement</h3>
+        <p class="tip-copy">Swap your moves with friends and inspire them to pause for Scripture each day.</p>
+      </article>
+    </section>
   </main>
 
   <footer class="app-footer">

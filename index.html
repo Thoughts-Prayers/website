@@ -54,7 +54,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -74,7 +74,7 @@
       color: var(--text);
       margin: 0;
       padding: 0;
-      line-height: 1.6;
+      line-height: 1.7;
       position: relative;
       min-height: 100vh;
       overflow-x: hidden;
@@ -90,6 +90,66 @@
       pointer-events: none;
       z-index: -1;
     }
+    .background-waves {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .background-waves .wave-layer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 160%;
+      height: 160%;
+      transform: translate(-50%, -50%);
+      opacity: 0.55;
+      filter: blur(80px);
+      animation: waveDrift 24s ease-in-out infinite;
+      background: radial-gradient(circle at 30% 30%, rgba(58, 160, 255, 0.35), rgba(58, 160, 255, 0) 60%);
+      mix-blend-mode: normal;
+    }
+    .background-waves .wave-layer--two {
+      animation-duration: 32s;
+      animation-direction: reverse;
+      background: radial-gradient(circle at 70% 40%, rgba(27, 75, 129, 0.28), rgba(27, 75, 129, 0) 66%);
+      opacity: 0.42;
+    }
+    .background-waves .wave-layer--three {
+      animation-duration: 40s;
+      background: radial-gradient(circle at 50% 70%, rgba(165, 216, 255, 0.45), rgba(165, 216, 255, 0) 70%);
+      opacity: 0.36;
+    }
+    .floating-bubbles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .floating-bubbles .bubble {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+      filter: blur(2px);
+      opacity: 0.55;
+      animation: bubbleFloat 22s ease-in-out infinite;
+    }
+    .floating-bubbles .bubble::after {
+      content: '';
+      position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 70% 30%, rgba(165, 216, 255, 0.55), rgba(165, 216, 255, 0));
+    }
+    .bubble--one { left: 8%; bottom: -140px; animation-duration: 26s; }
+    .bubble--two { left: 28%; bottom: -180px; width: 160px; height: 160px; animation-delay: 4s; }
+    .bubble--three { right: 22%; bottom: -160px; width: 140px; height: 140px; animation-duration: 28s; animation-delay: 2s; }
+    .bubble--four { right: 6%; bottom: -200px; width: 180px; height: 180px; animation-duration: 24s; animation-delay: 6s; }
+    .bubble--five { left: 55%; bottom: -170px; width: 110px; height: 110px; animation-duration: 20s; animation-delay: 10s; }
     a {
       color: var(--sky-deep);
       text-decoration: none;
@@ -107,6 +167,7 @@
       color: #fff;
       padding: 2.4rem 1rem 2.2rem;
       text-align: center;
+      z-index: 1;
     }
     header::before {
       content: '';
@@ -126,15 +187,30 @@
       transform: rotate(-2deg);
       pointer-events: none;
     }
-    header h1 { margin: 0; font-size: 2.35rem; font-weight: 700; letter-spacing: 0.01em; }
-    header h1 .cross { font-variant-emoji: text; } /* Prevent emoji rendering */
-    header p { font-size: 1.15rem; margin-top: 0.6rem; opacity: 0.94; }
+    .site-title {
+      margin: 0;
+      font-size: clamp(2.2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      font-family: 'Quicksand', 'Inter', sans-serif;
+    }
+    .site-title .cross {
+      font-variant-emoji: text;
+      margin-right: 0.35rem;
+    }
+    .site-subtitle {
+      font-size: 1.15rem;
+      margin-top: 0.6rem;
+      opacity: 0.94;
+      font-family: 'Inter', sans-serif;
+    }
 
     main {
       max-width: 840px;
       margin: 3rem auto 0;
       padding: 0 1.5rem 4rem;
       position: relative;
+      z-index: 1;
     }
     main::before {
       content: '';
@@ -156,41 +232,28 @@
       background: radial-gradient(120% 120% at 50% 100%, rgba(181, 223, 255, 0.36), rgba(181, 223, 255, 0));
       pointer-events: none;
     }
-    h2 {
+    .content-section {
+      margin: 0 auto;
+      padding: 0 0 2.6rem;
+      max-width: 60ch;
+      text-align: left;
+    }
+    .content-section:first-of-type {
+      padding-top: 0.5rem;
+    }
+    .section-title {
       color: var(--sky-deep);
-      margin-top: 2.4rem;
       font-weight: 700;
       letter-spacing: 0.01em;
+      font-size: clamp(1.8rem, 3vw, 2.1rem);
+      font-family: 'Quicksand', 'Inter', sans-serif;
+      margin: 0 0 1rem;
     }
-
-    blockquote {
-      background: rgba(245, 251, 255, 0.72);
-      border-left: 4px solid var(--sky);
-      border-radius: 16px;
-      padding: 1.6rem 1.8rem;
-      margin: 2.2rem 0;
-      color: var(--text);
-      text-align: center;
-      box-shadow: 0 18px 38px var(--shadow);
-      backdrop-filter: blur(6px);
-    }
-    blockquote .verse {
-      font-size: 1.4rem;
-      font-style: italic;
-      margin: 0 0 0.65rem;
-      position: relative;
-    }
-    blockquote .verse::before {
-      content: "✝︎ ";
-      color: var(--sky);
-      font-weight: bold;
-      font-variant-emoji: text;
-    }
-    blockquote cite {
-      display: block;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--sky-deep);
+    .section-lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
     }
 
     .button-container {
@@ -201,7 +264,9 @@
       gap: 1rem;
     }
     .cta-button {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
       padding: 0.85rem 1.8rem;
       border-radius: 999px;
       background: linear-gradient(140deg, #3AA0FF 0%, #2F8BEA 100%);
@@ -212,6 +277,11 @@
       letter-spacing: 0.02em;
       transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
       box-shadow: 0 10px 24px var(--shadow);
+      font-family: 'Quicksand', 'Inter', sans-serif;
+    }
+    .cta-icon {
+      font-size: 1.25rem;
+      line-height: 1;
     }
     .cta-button:focus,
     .cta-button:hover {
@@ -219,9 +289,118 @@
       filter: brightness(1.05);
       box-shadow: 0 14px 30px rgba(18, 65, 110, 0.26);
     }
-    .games-intro {
-      margin: 0 0 1rem;
+    .mission-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 1.3rem;
+    }
+    .mission-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.8rem;
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .mission-list li::marker {
+      color: var(--sky);
+    }
+    .stat-grid {
+      display: grid;
+      gap: 1.2rem;
+      margin-top: 1.3rem;
+    }
+    .stat-card {
+      background: rgba(245, 251, 255, 0.8);
+      border-radius: 18px;
+      padding: 1.6rem 1.4rem;
+      text-align: center;
+      box-shadow: 0 20px 42px rgba(18, 65, 110, 0.16);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(165, 216, 255, 0.4);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .stat-value {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--sky-deep);
+      font-family: 'Quicksand', 'Inter', sans-serif;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      display: block;
+      font-size: 0.95rem;
       color: var(--muted);
+    }
+    .stat-card:hover,
+    .stat-card:focus-within {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 28px 52px rgba(18, 65, 110, 0.24);
+    }
+    .quote-section {
+      max-width: 52ch;
+      margin: 0 auto;
+    }
+    blockquote {
+      background: rgba(245, 251, 255, 0.72);
+      border-left: 4px solid var(--sky);
+      border-radius: 16px;
+      padding: 1.6rem 1.8rem;
+      margin: 2.2rem 0;
+      color: var(--text);
+      text-align: left;
+      box-shadow: 0 18px 38px var(--shadow);
+      backdrop-filter: blur(6px);
+      position: relative;
+    }
+    .quote-mark {
+      display: inline-block;
+      font-size: 3.4rem;
+      line-height: 0.8;
+      color: var(--sky-light);
+      transform: translateY(0.6rem);
+    }
+    blockquote .verse {
+      font-size: 1.35rem;
+      font-style: italic;
+      margin: 0.4rem 0 0.8rem;
+      position: relative;
+      font-family: 'Quicksand', 'Inter', sans-serif;
+      color: var(--sky-deep);
+    }
+    blockquote cite {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    @media (min-width: 720px) {
+      .mission-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: start;
+      }
+      .stat-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 640px) {
+      main {
+        padding: 0 1.2rem 3rem;
+      }
+      .button-container {
+        width: 100%;
+      }
+      .cta-button {
+        width: 100%;
+        justify-content: center;
+      }
+      .stat-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     footer {
@@ -233,6 +412,7 @@
       font-size: 0.9rem;
       color: rgba(255, 255, 255, 0.86);
       overflow: hidden;
+      z-index: 1;
     }
     footer::before {
       content: '';
@@ -250,6 +430,55 @@
       z-index: 1;
     }
 
+    @keyframes waveDrift {
+      0% {
+        transform: translate(-50%, -52%) rotate(0deg) scale(1.05);
+      }
+      25% {
+        transform: translate(-48%, -50%) rotate(6deg) scale(1.15);
+      }
+      50% {
+        transform: translate(-52%, -48%) rotate(0deg) scale(1.1);
+      }
+      75% {
+        transform: translate(-51%, -54%) rotate(-6deg) scale(1.18);
+      }
+      100% {
+        transform: translate(-50%, -52%) rotate(0deg) scale(1.05);
+      }
+    }
+
+    @keyframes bubbleFloat {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.9);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.55;
+      }
+      50% {
+        transform: translate3d(8%, -50vh, 0) scale(1.05);
+        opacity: 0.65;
+      }
+      90% {
+        opacity: 0.0;
+      }
+      100% {
+        transform: translate3d(-4%, -105vh, 0) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .background-waves .wave-layer,
+      .floating-bubbles .bubble,
+      .app-main::before,
+      .app-main::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+
     /* Dark mode overrides */
     @media (prefers-color-scheme: dark) {
       body {
@@ -262,7 +491,13 @@
       header::before {
         background: radial-gradient(70% 55% at 50% 30%, rgba(58, 160, 255, 0.26), rgba(58, 160, 255, 0));
       }
-      h2 { color: #A5D8FF; }
+      .background-waves .wave-layer {
+        opacity: 0.4;
+      }
+      .floating-bubbles .bubble {
+        opacity: 0.4;
+      }
+      .section-title { color: #A5D8FF; }
       a {
         color: #91C9FF;
       }
@@ -276,8 +511,11 @@
         color: rgba(240, 244, 250, 0.92);
         box-shadow: 0 18px 40px rgba(6, 20, 35, 0.5);
       }
-      blockquote .verse::before {
-        color: #A5D8FF;
+      .quote-mark {
+        color: rgba(165, 216, 255, 0.7);
+      }
+      blockquote .verse {
+        color: rgba(214, 233, 255, 0.92);
       }
       blockquote cite {
         color: #91C9FF;
@@ -295,8 +533,22 @@
         color: #fff;
         filter: brightness(1.15);
       }
-      .games-intro {
+      .section-lead {
         color: rgba(198, 214, 230, 0.76);
+      }
+      .mission-list {
+        color: rgba(214, 233, 255, 0.88);
+      }
+      .stat-card {
+        background: rgba(9, 32, 52, 0.78);
+        border-color: rgba(145, 201, 255, 0.38);
+        box-shadow: 0 18px 36px rgba(3, 13, 23, 0.58);
+      }
+      .stat-value {
+        color: #A5D8FF;
+      }
+      .stat-label {
+        color: rgba(198, 214, 230, 0.7);
       }
       .button-container {
         justify-content: flex-start;
@@ -305,41 +557,93 @@
   </style>
 </head>
 <body>
+  <div class="background-waves" aria-hidden="true">
+    <span class="wave-layer wave-layer--one"></span>
+    <span class="wave-layer wave-layer--two"></span>
+    <span class="wave-layer wave-layer--three"></span>
+  </div>
+  <div class="floating-bubbles" aria-hidden="true">
+    <span class="bubble bubble--one"></span>
+    <span class="bubble bubble--two"></span>
+    <span class="bubble bubble--three"></span>
+    <span class="bubble bubble--four"></span>
+    <span class="bubble bubble--five"></span>
+  </div>
   <header>
-    <h1><span class="cross">✝︎</span> Thoughts &amp; Prayers Foundation</h1>
-    <p>Playful journeys that spark hope, faith, and wonder</p>
+    <h1 class="site-title"><span class="cross">✝︎</span> Thoughts &amp; Prayers Foundation</h1>
+    <p class="site-subtitle">Playful journeys that spark hope, faith, and wonder</p>
   </header>
 
   <main>
-    <h2>Games</h2>
-    <p class="games-intro">
-      Discover experiences that nourish the soul. Start with <em>Our Daily Bread</em>,
-      a daily picture puzzle inviting you to pause and reflect on Scripture each day.
-    </p>
-    <div class="button-container">
-      <a class="cta-button" href="/our-daily-bread/">Play Our Daily Bread</a>
-    </div>
+    <section class="content-section">
+      <h2 class="section-title">Games</h2>
+      <p class="section-lead">
+        Discover experiences that nourish the soul. Start with <em>Our Daily Bread</em>,
+        a daily picture puzzle inviting you to pause and reflect on Scripture each day.
+      </p>
+      <div class="button-container">
+        <a class="cta-button" href="/our-daily-bread/">
+          <span class="cta-icon" aria-hidden="true">🌊</span>
+          Play Our Daily Bread
+        </a>
+      </div>
+    </section>
 
-    <h2>Our Mission</h2>
-    <p>
-      The Thoughts & Prayers Foundation creates <strong>playful journeys that spark hope, faith, and wonder</strong> —
-      bringing people closer to Jesus and to one another.
-    </p>
-    <div class="button-container">
-      <a class="cta-button" href="https://secure.givelively.org/donate/thoughts-prayers-foundation-inc" target="_blank" rel="noopener">Donate</a>
-    </div>
+    <section class="content-section">
+      <h2 class="section-title">Our Mission</h2>
+      <div class="mission-grid">
+        <p class="section-lead">
+          The Thoughts &amp; Prayers Foundation creates <strong>playful journeys that spark hope, faith, and wonder</strong> —
+          bringing people closer to Jesus and to one another.
+        </p>
+        <ul class="mission-list">
+          <li>Design experiences that invite daily moments of prayerful pause.</li>
+          <li>Celebrate community with gentle humor, warmth, and generosity.</li>
+          <li>Build tools that make Scripture engagement feel approachable for every age.</li>
+        </ul>
+      </div>
+      <div class="button-container">
+        <a class="cta-button" href="https://secure.givelively.org/donate/thoughts-prayers-foundation-inc" target="_blank" rel="noopener">
+          <span class="cta-icon" aria-hidden="true">💙</span>
+          Donate
+        </a>
+      </div>
+    </section>
 
-    <h2>About Us</h2>
-    <p>
-      We love weaving story and technology together to share <strong>the love of Jesus</strong> in surprising, joy-filled ways.
-      With service, community, and imagination as our compass, we craft interactive adventures
-      that invite you to walk with Him each day and rediscover the delight of faith through play.
-    </p>
+    <section class="content-section">
+      <h2 class="section-title">Community Ripples</h2>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-value">38k+</span>
+          <span class="stat-label">Daily puzzles solved</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">120</span>
+          <span class="stat-label">Scripture passages highlighted</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">4.9★</span>
+          <span class="stat-label">Average joy score from players</span>
+        </div>
+      </div>
+    </section>
 
-    <blockquote>
-      <p class="verse">“Your word is a lamp to my feet and a light to my path.”</p>
-      <cite>— Psalm 119:105</cite>
-    </blockquote>
+    <section class="content-section">
+      <h2 class="section-title">About Us</h2>
+      <p class="section-lead">
+        We love weaving story and technology together to share <strong>the love of Jesus</strong> in surprising, joy-filled ways.
+        With service, community, and imagination as our compass, we craft interactive adventures
+        that invite you to walk with Him each day and rediscover the delight of faith through play.
+      </p>
+    </section>
+
+    <section class="content-section quote-section">
+      <blockquote>
+        <span class="quote-mark" aria-hidden="true">“</span>
+        <p class="verse">Your word is a lamp to my feet and a light to my path.</p>
+        <cite>Psalm 119:105</cite>
+      </blockquote>
+    </section>
 
   </main>
 
