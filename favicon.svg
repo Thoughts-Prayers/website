@@ -1,5 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <rect width="512" height="512" fill="#FBC02D" rx="100" ry="100" data-noir-inline-fill="" style="--noir-inline-fill: #ae7d03;"></rect>
+  <defs>
+    <linearGradient id="favicon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3AA0FF"/>
+      <stop offset="100%" stop-color="#1B4B81"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#favicon-gradient)" rx="100" ry="100" data-noir-inline-fill="" style="--noir-inline-fill: #1b4b81;"></rect>
   <text x="50%" y="50%" text-anchor="middle" fill="#ffffff" font-family="Inter, sans-serif" font-size="380" font-weight="700" dominant-baseline="middle" dy="5%" data-noir-inline-fill="" style="--noir-inline-fill: #e8e6e3;">✝</text>
 </svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
 @media (prefers-color-scheme: dark) { :root { filter: none; } }

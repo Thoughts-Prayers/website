@@ -1,6 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
-  <!-- Gold background -->
-  <rect width="1200" height="630" fill="#DAA520"/>
+  <defs>
+    <linearGradient id="og-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3AA0FF"/>
+      <stop offset="100%" stop-color="#1B4B81"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky blue background -->
+  <rect width="1200" height="630" fill="url(#og-gradient)"/>
 
   <!-- Cross -->
   <text x="50%" y="34%" text-anchor="middle" fill="#ffffff"
