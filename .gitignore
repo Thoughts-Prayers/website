@@ -1,1 +1,23 @@
-our-daily-bread/assets/.DS_Store
+# macOS metadata
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+# Windows metadata
+Thumbs.db
+Thumbs.db:*
+ehthumbs.db
+
+# IDE settings
+.idea/
+.vscode/
+*.code-workspace
+
+# Build artifacts and logs
+dist/
+build/
+coverage/
+*.log
+*.map
