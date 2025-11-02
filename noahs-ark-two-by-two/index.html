@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Noah’s Ark: Two by Two • Thoughts & Prayers Foundation</title>
+  <meta name="description" content="Match animal pairs and fill the ark in Noah’s Ark: Two by Two, a gentle memory game." />
+  <meta name="theme-color" content="#3AA0FF" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Noah’s Ark: Two by Two" />
+  <meta property="og:description" content="Match animal pairs and guide them aboard the ark in this cozy memory game." />
+  <meta property="og:url" content="https://thoughtsandprayersfoundation.org/noahs-ark-two-by-two/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Noah’s Ark: Two by Two" />
+  <meta name="twitter:description" content="Match animal pairs and guide them aboard the ark in this cozy memory game." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/main.css?v=20250225" />
+</head>
+<body>
+  <div class="sky-ornaments" aria-hidden="true">
+    <span class="cloud cloud--one"></span>
+    <span class="cloud cloud--two"></span>
+    <span class="cloud cloud--three"></span>
+    <span class="rainbow-accent"></span>
+  </div>
+  <header class="app-header">
+    <div class="branding">
+      <a class="home-link" href="/">Thoughts &amp; Prayers Foundation</a>
+      <h1>Noah’s Ark: Two by Two</h1>
+      <p class="tagline">Guide every pair aboard before the rains arrive.</p>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <section class="game-stage">
+      <div class="ark-frame">
+        <div id="game-grid" class="card-grid" role="grid" aria-label="Memory cards" tabindex="-1"></div>
+      </div>
+    </section>
+
+    <section class="control-panel" aria-label="Game controls">
+      <div class="difficulty-control">
+        <label for="difficulty">Difficulty</label>
+        <select id="difficulty" name="difficulty" aria-label="Select game difficulty"></select>
+      </div>
+      <div class="hud">
+        <div class="hud-block">
+          <span class="hud-label">Pairs</span>
+          <span id="matched-pairs" class="hud-value">0 / 0</span>
+        </div>
+        <div class="hud-block">
+          <span class="hud-label">Moves</span>
+          <span id="move-counter" class="hud-value">0</span>
+        </div>
+        <div class="hud-block">
+          <span class="hud-label">Time</span>
+          <span id="timer" class="hud-value" aria-live="polite">0:00</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="puzzle-meta" aria-live="polite">
+      <div class="meta-card meta-card--accent">
+        <span class="meta-label">Ark status</span>
+        <span id="ark-status" class="meta-value">Awaiting passengers</span>
+      </div>
+      <div class="meta-card">
+        <span class="meta-label">Grid</span>
+        <span id="grid-label" class="meta-value">4×4</span>
+      </div>
+      <div class="meta-card">
+        <span class="meta-label">Difficulty</span>
+        <span id="difficulty-label" class="meta-value">Gentle drizzle (4×4)</span>
+      </div>
+    </section>
+
+    <section class="fact-panel" aria-live="polite" hidden>
+      <h2 class="fact-heading">Latest arrivals</h2>
+      <p id="fact-body" class="fact-copy"></p>
+    </section>
+
+    <section class="action-row">
+      <button type="button" id="restart" class="accent">Reset voyage</button>
+      <button type="button" id="share" class="secondary" disabled>Share result</button>
+    </section>
+
+    <section class="tip-deck" aria-label="How to play">
+      <article class="tip-card">
+        <span class="tip-icon" aria-hidden="true">🌈</span>
+        <h3 class="tip-title">Find every pair</h3>
+        <p class="tip-copy">Flip two cards at a time, remembering where each animal hides. Match them to welcome them aboard.</p>
+      </article>
+      <article class="tip-card">
+        <span class="tip-icon" aria-hidden="true">🌧️</span>
+        <h3 class="tip-title">Keep the rain at bay</h3>
+        <p class="tip-copy">Each mismatch nudges the storm closer. Streak matches to earn rainbow reveals.</p>
+      </article>
+      <article class="tip-card">
+        <span class="tip-icon" aria-hidden="true">🕊️</span>
+        <h3 class="tip-title">Share hope</h3>
+        <p class="tip-copy">Send your results to friends so they can help the ark sail another day.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p class="footer-copy">&copy; 2025 Thoughts &amp; Prayers Foundation, Inc.</p>
+  </footer>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
