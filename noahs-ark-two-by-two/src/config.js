@@ -1,4 +1,4 @@
-export const BUILD_VERSION = '20250305';
+export const BUILD_VERSION = '20251112';
 
 export const DIFFICULTIES = [
   {
