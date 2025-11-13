@@ -163,9 +163,9 @@
       gap: 1rem;
       padding: 0;
     }
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
+.cta-button {
+  display: inline-flex;
+  align-items: center;
       gap: 0.55rem;
       padding: 0.85rem 1.8rem;
       border-radius: 999px;
@@ -303,7 +303,18 @@
       .stat-grid {
         grid-template-columns: minmax(0, 1fr);
       }
-    }
+      .cta-note {
+        margin-bottom: 1rem;
+      }
+}
+
+.cta-note {
+  margin: 0.5rem 0 1.4rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+  text-align: center;
+  max-width: 24rem;
+}
 
     footer {
       text-align: center;
@@ -414,14 +425,17 @@
           <span class="cta-icon" aria-hidden="true">🌊</span>
           Play Our Daily Bread
         </a>
+        <p class="cta-note">Solve a fresh Scripture-inspired photo puzzle every morning.</p>
         <a class="cta-button" href="/noahs-ark-two-by-two/">
           <span class="cta-icon" aria-hidden="true">🌈</span>
           Play Noah’s Ark: Two by Two
         </a>
+        <p class="cta-note">Match animal pairs and calm the storm with cozy memory play.</p>
         <a class="cta-button" href="/scripture-fill-ins/">
           <span class="cta-icon" aria-hidden="true">📖</span>
           Play Scripture Fill-Ins
         </a>
+        <p class="cta-note">Complete encouraging verses by choosing the missing words.</p>
       </div>
     </section>
 
