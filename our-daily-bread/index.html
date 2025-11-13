@@ -23,28 +23,11 @@
   <link rel="stylesheet" href="./styles/main.css?v=20250225" />
 </head>
 <body>
-  <div class="floating-bubbles" aria-hidden="true">
-    <span class="bubble bubble--one"></span>
-    <span class="bubble bubble--two"></span>
-    <span class="bubble bubble--three"></span>
-  </div>
   <header class="app-header">
     <div class="branding">
       <a class="home-link" href="/">Thoughts &amp; Prayers Foundation</a>
       <h1>Our Daily Bread</h1>
       <p class="tagline">A thoughtful picture puzzle to start your day with Scripture.</p>
-      <div class="tagline-wave" aria-hidden="true"></div>
-    </div>
-    <div class="header-actions">
-      <div class="difficulty-control">
-        <label for="difficulty">Difficulty</label>
-        <select id="difficulty" name="difficulty" aria-label="Select puzzle difficulty"></select>
-      </div>
-      <div class="hud">
-        <span class="hud-label">Moves</span>
-        <span id="moves" class="hud-value">0</span>
-        <span id="status" class="status" aria-live="polite"></span>
-      </div>
     </div>
   </header>
 
@@ -70,6 +53,17 @@
       </div>
       <div class="puzzle-frame">
         <div id="puzzle" aria-label="Picture puzzle" role="application"></div>
+      </div>
+    </div>
+    <div class="control-panel" aria-label="Puzzle controls">
+      <div class="difficulty-control">
+        <label for="difficulty">Difficulty</label>
+        <select id="difficulty" name="difficulty" aria-label="Select puzzle difficulty"></select>
+      </div>
+      <div class="hud">
+        <span class="hud-label">Moves</span>
+        <span id="moves" class="hud-value">0</span>
+        <span id="status" class="status" aria-live="polite"></span>
       </div>
     </div>
     <div class="share-actions" hidden>
