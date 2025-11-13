@@ -1,0 +1,111 @@
+:root[data-theme="dark"] {
+  --gradient-sky: linear-gradient(145deg, #0E1A3F 0%, #1F2556 100%);
+  --surface: rgba(14, 20, 44, 0.92);
+  --surface-soft: rgba(12, 18, 38, 0.88);
+  --text: #EFF1FF;
+  --muted: #9AA7D1;
+  --accent: #FFC06A;
+  --accent-strong: #FF9F5A;
+  --glow: rgba(77, 124, 254, 0.35);
+  --shadow: rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="dark"] body {
+  background: radial-gradient(circle at top, rgba(77, 124, 254, 0.25), transparent 45%), #060915;
+  color: var(--text);
+}
+
+[data-theme="dark"] .hero {
+  background: var(--gradient-sky);
+  box-shadow: 0 22px 46px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .hero__home {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+[data-theme="dark"] .hero__tagline {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme="dark"] .stats-panel .score-chip {
+  background: rgba(16, 24, 48, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .verse-card {
+  background: var(--surface);
+  border-color: rgba(77, 124, 254, 0.35);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .verse-text {
+  color: var(--text);
+}
+
+[data-theme="dark"] .verse-text .blank {
+  background: rgba(77, 124, 254, 0.18);
+  border-color: rgba(77, 124, 254, 0.42);
+}
+
+[data-theme="dark"] .verse-text .blank--filled {
+  background: rgba(255, 159, 90, 0.25);
+  border-color: rgba(255, 159, 90, 0.65);
+  color: var(--accent);
+}
+
+[data-theme="dark"] .choices-panel {
+  background: var(--surface-soft);
+  border-color: rgba(77, 124, 254, 0.25);
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="dark"] .choice-card {
+  background: rgba(10, 16, 32, 0.9);
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .choice-option {
+  background: rgba(18, 28, 52, 0.95);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+[data-theme="dark"] .choice-option:hover,
+[data-theme="dark"] .choice-option:focus-visible {
+  border-color: rgba(110, 165, 255, 0.9);
+  color: #AFBEFF;
+}
+
+[data-theme="dark"] .choice-option.is-selected {
+  background: rgba(110, 165, 255, 0.25);
+  border-color: rgba(110, 165, 255, 0.9);
+}
+
+[data-theme="dark"] .choice-option.is-correct {
+  background: rgba(92, 230, 176, 0.25);
+  border-color: rgba(92, 230, 176, 0.9);
+}
+
+[data-theme="dark"] .choice-option.is-incorrect {
+  background: rgba(248, 110, 81, 0.25);
+  border-color: rgba(248, 110, 81, 0.9);
+}
+
+[data-theme="dark"] .action--ghost {
+  background: rgba(12, 18, 38, 0.92);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--text);
+}
+
+[data-theme="dark"] .tip {
+  background: rgba(12, 18, 38, 0.92);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .tip__copy,
+[data-theme="dark"] .site-footer {
+  color: var(--muted);
+}

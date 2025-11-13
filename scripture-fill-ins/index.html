@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Scripture Fill-Ins • Thoughts & Prayers Foundation</title>
+  <meta name="description" content="Family-friendly Bible fill-in-the-blank game. Complete missing words from Scripture verses using gentle multiple-choice prompts." />
+  <meta name="theme-color" content="#4D7CFE" />
+  <meta name="color-scheme" content="light dark" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Scripture Fill-Ins" />
+  <meta property="og:description" content="Complete missing words from Scripture verses using friendly multiple-choice prompts." />
+  <meta property="og:url" content="https://thoughtsandprayersfoundation.org/scripture-fill-ins/" />
+  <meta property="og:image" content="https://thoughtsandprayersfoundation.org/assets/og-image.png?v=20251112" />
+  <meta property="og:image:secure_url" content="https://thoughtsandprayersfoundation.org/assets/og-image.png?v=20251112" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Scripture Fill-Ins — Complete each verse with the right word." />
+  <meta property="og:site_name" content="Thoughts &amp; Prayers Foundation" />
+  <link rel="canonical" href="https://thoughtsandprayersfoundation.org/scripture-fill-ins/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Scripture Fill-Ins" />
+  <meta name="twitter:description" content="Family-friendly Bible fill-in-the-blank game with multiple-choice prompts." />
+  <meta name="twitter:image" content="https://thoughtsandprayersfoundation.org/assets/og-image.png?v=20251112" />
+  <meta name="twitter:image:alt" content="Scripture Fill-Ins — Complete each verse with the right word." />
+  <meta name="twitter:url" content="https://thoughtsandprayersfoundation.org/scripture-fill-ins/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles/main.css?v=20251112" />
+  <link rel="stylesheet" href="./styles/dark-mode.css?v=20251112" media="(prefers-color-scheme: dark)" />
+</head>
+<body>
+  <div class="background-glow" aria-hidden="true"></div>
+  <header class="hero">
+    <div class="hero__branding">
+      <a class="hero__home" href="/">Thoughts &amp; Prayers Foundation</a>
+      <h1>Scripture Fill-Ins</h1>
+      <p class="hero__tagline">Complete the missing words from beloved verses and hide His Word in your heart.</p>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="verse-card" aria-live="polite">
+      <div class="verse-card__top">
+        <span id="verse-reference" class="verse-reference">—</span>
+        <span id="verse-mode" class="verse-mode">Multiple choice</span>
+      </div>
+      <p id="verse-body" class="verse-text">Loading verse…</p>
+    </section>
+
+    <section class="choices-panel" aria-label="Answer choices">
+      <header class="choices-panel__header">
+        <h2>Pick the missing words</h2>
+        <p>Tap each option to fill the blanks.</p>
+      </header>
+      <div id="choices-wrapper" class="choices-grid"></div>
+    </section>
+
+    <section class="action-tray">
+      <button type="button" id="check-answer" class="action action--primary" disabled>Check answers</button>
+      <button type="button" id="next-verse" class="action action--ghost" disabled>Next verse</button>
+    </section>
+
+    <section class="tips-deck" aria-label="How to play tips">
+      <article class="tip">
+        <span class="tip__icon" aria-hidden="true">📖</span>
+        <h3 class="tip__title">Read the flow</h3>
+        <p class="tip__copy">Context clues from the verse often reveal which word belongs in each blank.</p>
+      </article>
+      <article class="tip">
+        <span class="tip__icon" aria-hidden="true">👨‍👩‍👧‍👦</span>
+        <h3 class="tip__title">Play together</h3>
+        <p class="tip__copy">Take turns answering each blank to spark conversation about Scripture.</p>
+      </article>
+      <article class="tip">
+        <span class="tip__icon" aria-hidden="true">✨</span>
+        <h3 class="tip__title">Celebrate progress</h3>
+        <p class="tip__copy">Each completed verse adds to your streak. Missed words still count as learning moments!</p>
+      </article>
+    </section>
+
+    <section class="stats-panel" aria-live="polite">
+      <div class="score-chip">
+        <span class="score-chip__label">Accuracy</span>
+        <span id="accuracy" class="score-chip__value">—</span>
+      </div>
+      <div class="score-chip">
+        <span class="score-chip__label">Verses Played</span>
+        <span id="verses-played" class="score-chip__value">0</span>
+      </div>
+      <div class="score-chip">
+        <span class="score-chip__label">Streak</span>
+        <span id="streak" class="score-chip__value">0</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Thoughts &amp; Prayers Foundation, Inc.</p>
+  </footer>
+
+  <script type="module" src="./src/theme.js"></script>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
