@@ -73,7 +73,6 @@ export class MemoryGame {
           <span class="card-face card-face--front" aria-hidden="true"></span>
           <span class="card-face card-face--back">
             <span class="card-emoji" aria-hidden="true">${card.emoji}</span>
-            <span class="card-label">${card.name}</span>
           </span>
         </span>
       `;

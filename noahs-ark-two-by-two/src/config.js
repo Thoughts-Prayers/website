@@ -3,19 +3,19 @@ export const BUILD_VERSION = '20250305';
 export const DIFFICULTIES = [
   {
     id: 'gentle',
-    label: 'Gentle drizzle',
+    label: 'Easy',
     rows: 4,
     cols: 4,
   },
   {
     id: 'steady',
-    label: 'Steady rain',
+    label: 'Standard',
     rows: 4,
     cols: 5,
   },
   {
     id: 'deluge',
-    label: 'Flood watch',
+    label: 'Expert',
     rows: 6,
     cols: 6,
   },

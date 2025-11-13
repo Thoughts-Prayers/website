@@ -134,15 +134,21 @@ a:focus {
 
 .branding h1 {
   margin: 0.25rem 0 0;
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 4vw, 2rem);
   font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tagline {
   margin: 0.45rem 0 0;
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 3vw, 1rem);
   color: rgba(255, 255, 255, 0.9);
   max-width: 42ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .difficulty-control {
@@ -151,7 +157,7 @@ a:focus {
   gap: 0.45rem;
 }
 
-.difficulty-control label {
+.difficulty-label {
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -159,16 +165,55 @@ a:focus {
   font-weight: 600;
 }
 
-.difficulty-control select {
+.difficulty-segments {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.35rem;
+  padding: 0.35rem;
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(245, 251, 255, 0.95), rgba(165, 216, 255, 0.85));
+  box-shadow: 0 10px 24px rgba(11, 53, 94, 0.14);
+}
+
+.difficulty-option {
   appearance: none;
-  border: 0;
+  border: 1px solid transparent;
   border-radius: 12px;
-  padding: 0.6rem 2.2rem 0.6rem 0.9rem;
-  font-size: 0.98rem;
+  background: transparent;
+  color: var(--muted);
+  padding: 0.55rem 0.85rem;
+  text-align: left;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.95rem;
   font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.difficulty-option__label {
+  font-size: 1rem;
   color: var(--highlight-dark);
-  background: linear-gradient(145deg, rgba(245, 251, 255, 0.95), rgba(165, 216, 255, 0.9));
-  box-shadow: 0 10px 24px rgba(11, 53, 94, 0.28);
+}
+
+.difficulty-option__meta {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(13, 44, 79, 0.6);
+}
+
+.difficulty-option.is-active {
+  background: linear-gradient(145deg, rgba(58, 160, 255, 0.18), rgba(27, 75, 129, 0.15));
+  border-color: rgba(27, 75, 129, 0.35);
+  box-shadow: 0 10px 20px rgba(27, 75, 129, 0.18);
+}
+
+.difficulty-option:focus-visible {
+  outline: 3px solid var(--highlight);
+  outline-offset: 3px;
 }
 
 .hud {
@@ -314,6 +359,7 @@ a:focus {
   background: transparent;
   perspective: 900px;
   transition: transform 0.2s ease;
+  container-type: inline-size;
 }
 
 .card:focus-visible {
@@ -354,27 +400,30 @@ a:focus {
 
 .card-face--front::after {
   content: '⛵';
-  font-size: 2rem;
+  font-size: clamp(2rem, 6vw, 3.2rem);
   opacity: 0.7;
+  line-height: 1;
+  display: block;
 }
 
 .card-face--back {
   background: linear-gradient(160deg, rgba(245, 251, 255, 0.95), rgba(165, 216, 255, 0.85));
   border: 2px solid rgba(27, 75, 129, 0.18);
   transform: rotateY(180deg);
-  gap: 0.35rem;
+  gap: 0;
 }
 
 .card-emoji {
-  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-size: clamp(2rem, 6vw, 3.2rem);
   line-height: 1;
+  display: block;
 }
 
-.card-label {
-  font-size: clamp(0.82rem, 2.4vw, 1rem);
-  font-weight: 600;
-  color: var(--highlight-dark);
-  text-align: center;
+@supports (font-size: 1cqw) {
+  .card-face--front::after,
+  .card-emoji {
+    font-size: clamp(2rem, 100cqw, 5rem);
+  }
 }
 
 .card.is-flipped .card-inner,
@@ -513,14 +562,6 @@ a:focus {
 
   .card-face {
     padding: 0.45rem;
-  }
-
-  .card-emoji {
-    font-size: clamp(1.3rem, 6vw, 2rem);
-  }
-
-  .card-label {
-    font-size: clamp(0.7rem, 3.2vw, 0.9rem);
   }
 }
 

@@ -31,15 +31,28 @@
   opacity: 0.4;
 }
 
-[data-theme="dark"] .difficulty-control select {
-  color: var(--text);
-  background: linear-gradient(145deg, rgba(23, 48, 75, 0.9), rgba(30, 62, 96, 0.9));
-  border: 1px solid rgba(120, 170, 220, 0.35);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+[data-theme="dark"] .difficulty-label {
+  color: rgba(237, 244, 255, 0.75);
 }
 
-[data-theme="dark"] .difficulty-control label {
-  color: rgba(237, 244, 255, 0.75);
+[data-theme="dark"] .difficulty-segments {
+  background: linear-gradient(145deg, rgba(12, 28, 48, 0.95), rgba(16, 32, 54, 0.9));
+  border: 1px solid rgba(100, 150, 210, 0.28);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .difficulty-option {
+  color: rgba(190, 208, 230, 0.85);
+}
+
+[data-theme="dark"] .difficulty-option__meta {
+  color: rgba(190, 208, 230, 0.55);
+}
+
+[data-theme="dark"] .difficulty-option.is-active {
+  background: linear-gradient(145deg, rgba(80, 140, 210, 0.25), rgba(30, 70, 110, 0.3));
+  border-color: rgba(120, 180, 240, 0.35);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
 }
 
 [data-theme="dark"] .hud {
@@ -85,10 +98,6 @@
 [data-theme="dark"] .card.is-matched .card-face--back {
   background: linear-gradient(160deg, rgba(46, 92, 136, 0.95), rgba(70, 132, 180, 0.85));
   border-color: rgba(120, 180, 240, 0.35);
-}
-
-[data-theme="dark"] .card-label {
-  color: var(--highlight-light);
 }
 
 [data-theme="dark"] .fact-panel,

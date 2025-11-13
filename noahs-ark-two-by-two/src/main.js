@@ -177,14 +177,96 @@ const game = new MemoryGame({
   onComplete,
 });
 
-const populateDifficultyOptions = () => {
+const renderDifficultyOptions = () => {
+  if (!dom.difficulty) {
+    return;
+  }
   dom.difficulty.innerHTML = '';
-  DIFFICULTIES.forEach((entry) => {
-    const option = document.createElement('option');
-    option.value = entry.id;
-    option.textContent = formatDifficultyLabel(entry);
-    dom.difficulty.appendChild(option);
+  DIFFICULTIES.forEach((entry, index) => {
+    const option = document.createElement('button');
+    option.type = 'button';
+    option.className = 'difficulty-option';
+    option.dataset.difficultyId = entry.id;
+    option.setAttribute('role', 'radio');
+    option.setAttribute('aria-checked', 'false');
+    option.tabIndex = index === 0 ? 0 : -1;
+
+    const label = document.createElement('span');
+    label.className = 'difficulty-option__label';
+    label.textContent = entry.label;
+
+    const meta = document.createElement('span');
+    meta.className = 'difficulty-option__meta';
+    meta.textContent = `${entry.rows}×${entry.cols}`;
+
+    option.append(label, meta);
+    dom.difficulty.append(option);
   });
+};
+
+const setActiveDifficultyOption = (difficultyId) => {
+  if (!dom.difficulty) {
+    return;
+  }
+  const options = dom.difficulty.querySelectorAll('.difficulty-option');
+  options.forEach((option) => {
+    const isActive = option.dataset.difficultyId === difficultyId;
+    option.classList.toggle('is-active', isActive);
+    option.setAttribute('aria-checked', isActive ? 'true' : 'false');
+    option.tabIndex = isActive ? 0 : -1;
+  });
+};
+
+const focusDifficultyByOffset = (offset) => {
+  if (!dom.difficulty) {
+    return;
+  }
+  const options = Array.from(dom.difficulty.querySelectorAll('.difficulty-option'));
+  if (!options.length) {
+    return;
+  }
+  const currentIndex = options.findIndex(
+    (option) => option.dataset.difficultyId === state.difficultyId,
+  );
+  const nextIndex =
+    currentIndex === -1
+      ? 0
+      : (currentIndex + offset + options.length) % options.length;
+  const nextOption = options[nextIndex];
+  nextOption.focus();
+  const nextId = nextOption.dataset.difficultyId;
+  if (nextId !== state.difficultyId) {
+    startGame(nextId);
+  }
+};
+
+const handleDifficultyClick = (event) => {
+  if (!dom.difficulty) {
+    return;
+  }
+  const trigger = event.target.closest('.difficulty-option');
+  if (!trigger) {
+    return;
+  }
+  const nextDifficulty = trigger.dataset.difficultyId;
+  if (!nextDifficulty || nextDifficulty === state.difficultyId) {
+    trigger.focus();
+    return;
+  }
+  startGame(nextDifficulty);
+};
+
+const handleDifficultyKeydown = (event) => {
+  if (!dom.difficulty) {
+    return;
+  }
+  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+    event.preventDefault();
+    focusDifficultyByOffset(1);
+  } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+    event.preventDefault();
+    focusDifficultyByOffset(-1);
+  }
 };
 
 const startGame = (difficultyId) => {
@@ -205,7 +287,9 @@ const startGame = (difficultyId) => {
   if (dom.difficultyLabel) {
     dom.difficultyLabel.textContent = formatDifficultyLabel(difficulty);
   }
-  dom.difficulty.value = difficulty.id;
+  if (dom.difficulty) {
+    setActiveDifficultyOption(difficulty.id);
+  }
 
   saveLocalSetting(STORAGE_KEYS.DIFFICULTY, difficulty.id);
 
@@ -219,19 +303,19 @@ const startGame = (difficultyId) => {
 };
 
 const init = () => {
-  populateDifficultyOptions();
+  renderDifficultyOptions();
 
   const storedDifficulty = loadLocalSetting(
     STORAGE_KEYS.DIFFICULTY,
     DEFAULT_DIFFICULTY,
   );
   state.difficultyId = storedDifficulty;
-  dom.difficulty.value = storedDifficulty;
+  setActiveDifficultyOption(storedDifficulty);
 
-  dom.difficulty.addEventListener('change', (event) => {
-    const nextDifficulty = event.target.value;
-    startGame(nextDifficulty);
-  });
+  if (dom.difficulty) {
+    dom.difficulty.addEventListener('click', handleDifficultyClick);
+    dom.difficulty.addEventListener('keydown', handleDifficultyKeydown);
+  }
 
   dom.restartButton.addEventListener('click', () => {
     startGame(state.difficultyId);

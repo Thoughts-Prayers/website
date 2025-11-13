@@ -55,8 +55,13 @@
 
     <section class="control-panel" aria-label="Game controls">
       <div class="difficulty-control">
-        <label for="difficulty">Difficulty</label>
-        <select id="difficulty" name="difficulty" aria-label="Select game difficulty"></select>
+        <span id="difficulty-legend" class="difficulty-label">Difficulty</span>
+        <div
+          id="difficulty"
+          class="difficulty-segments"
+          role="radiogroup"
+          aria-labelledby="difficulty-legend"
+        ></div>
       </div>
       <div class="hud">
         <div class="hud-block">
