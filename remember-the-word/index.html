@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Remember the Word – Thoughts &amp; Prayers Foundation</title>
+
+  <meta name="description" content="Remember the Word is a calming pattern memory game from Thoughts &amp; Prayers Foundation. Watch the symbols glow, repeat them, and keep the lamps burning.">
+  <link rel="canonical" href="https://thoughtsandprayersfoundation.org/remember-the-word/">
+  <meta name="theme-color" content="#3AA0FF">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Remember the Word">
+  <meta property="og:description" content="Practice Scripture-inspired memory with Remember the Word, a calm pattern game from Thoughts &amp; Prayers Foundation.">
+  <meta property="og:url" content="https://thoughtsandprayersfoundation.org/remember-the-word/">
+  <meta property="og:image" content="https://thoughtsandprayersfoundation.org/assets/og-image.png?v=20250929">
+  <meta property="og:image:alt" content="Remember the Word memory game from Thoughts &amp; Prayers Foundation">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Remember the Word">
+  <meta property="twitter:description" content="Watch symbols glow, repeat the pattern, and keep the lamps burning in this scripture-inspired memory game.">
+  <meta property="twitter:image" content="https://thoughtsandprayersfoundation.org/assets/og-image.png?v=20250929">
+
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --sky: #3AA0FF;
+      --sky-deep: #1B4B81;
+      --sky-light: #A5D8FF;
+      --foam: #F5FBFF;
+      --sand: #FFE2C8;
+      --text: #0D2C4F;
+      --muted: #48607A;
+      --shadow: rgba(18, 65, 110, 0.18);
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #FFFFFF;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: var(--sky-deep);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    a:hover,
+    a:focus-visible {
+      color: #2F8BEA;
+    }
+    header {
+      background: #1B4B81;
+      color: #fff;
+      padding: 1.5rem clamp(1rem, 4vw, 2rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(70% 55% at 50% 30%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .header-content {
+      position: relative;
+      z-index: 1;
+    }
+    .site-title {
+      margin: 0;
+      font-size: clamp(1.4rem, 4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      font-family: 'Quicksand', 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .site-subtitle {
+      margin: 0.2rem 0 0;
+      font-size: 1.05rem;
+      opacity: 0.92;
+    }
+    .header-link {
+      position: relative;
+      z-index: 1;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+    }
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.8rem 1.5rem 3rem;
+      display: flex;
+      justify-content: center;
+    }
+    .remember-word-section {
+      width: 100%;
+    }
+    .remember-word-card {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 28px;
+      padding: clamp(1.6rem, 3vw, 2.6rem);
+      border: 1px solid rgba(58, 160, 255, 0.35);
+      box-shadow: 0 24px 50px rgba(13, 44, 79, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .remember-word-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+    .remember-word-lead {
+      margin: 0;
+      max-width: 42ch;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .remember-word-stats {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .remember-word-stat {
+      display: flex;
+      flex-direction: column;
+      min-width: 5rem;
+    }
+    .remember-word-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .remember-word-stat strong {
+      font-size: 1.8rem;
+      color: var(--sky-deep);
+      font-family: 'Quicksand', 'Inter', sans-serif;
+      line-height: 1;
+    }
+    .lives {
+      display: flex;
+      gap: 0.25rem;
+      font-size: 1.2rem;
+      align-items: center;
+    }
+    .life-icon {
+      line-height: 1;
+    }
+    .remember-word-status {
+      border-radius: 22px;
+      padding: 1rem 1.1rem;
+      background: rgba(58, 160, 255, 0.08);
+      border: 1px dashed rgba(58, 160, 255, 0.5);
+      font-weight: 600;
+      color: var(--sky-deep);
+    }
+    .tile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.25rem;
+    }
+    .tile {
+      border: none;
+      border-radius: 20px;
+      padding: 1.3rem 0.65rem;
+      min-height: 120px;
+      background: linear-gradient(180deg, #F5FBFF 0%, #E1F1FF 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 10px 28px rgba(18, 65, 110, 0.12);
+      color: var(--text);
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: grid;
+      justify-items: center;
+      gap: 0.35rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .tile:focus-visible {
+      outline: 3px solid rgba(58, 160, 255, 0.65);
+      outline-offset: 2px;
+    }
+    .tile-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .tile-label {
+      font-size: 0.95rem;
+    }
+    .tile--active {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 22px rgba(13, 44, 79, 0.3);
+      background: linear-gradient(180deg, #ffffff 0%, #d3e9ff 100%);
+    }
+    .tile--locked {
+      cursor: not-allowed;
+      opacity: 0.6;
+      box-shadow: none;
+    }
+    .tile--locked::after {
+      content: attr(data-unlock-info);
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+    .remember-word-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+    .remember-word-tip {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      padding: 0.95rem 1.9rem;
+      border-radius: 999px;
+      background: linear-gradient(140deg, #3AA0FF 0%, #2F8BEA 100%);
+      border: 2px solid transparent;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      box-shadow: 0 10px 24px var(--shadow);
+      font-family: 'Quicksand', 'Inter', sans-serif;
+    }
+    .cta-button:focus-visible,
+    .cta-button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 14px 30px rgba(18, 65, 110, 0.3);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1.25rem 2.3rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(13, 44, 79, 0.1);
+    }
+    footer p {
+      margin: 0.25rem 0;
+    }
+    @media (max-width: 640px) {
+      header {
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+      }
+      .header-link {
+        width: 100%;
+        text-align: center;
+      }
+      .remember-word-card {
+        padding: 1.3rem;
+      }
+      .tile-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 1rem;
+      }
+      .tile {
+        min-height: 140px;
+        font-size: 1.08rem;
+        padding: 1.4rem 0.65rem;
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: linear-gradient(180deg, #0C1724 0%, #091220 100%);
+        color: rgba(240, 244, 250, 0.96);
+      }
+      header {
+        background: #0D1C34;
+      }
+      footer {
+        background: linear-gradient(180deg, rgba(15, 46, 75, 0.6) 0%, rgba(5, 18, 32, 0.92) 100%);
+        color: rgba(214, 230, 248, 0.85);
+        border-top-color: rgba(255, 255, 255, 0.12);
+      }
+      .remember-word-card {
+        background: rgba(9, 24, 39, 0.85);
+        border-color: rgba(58, 160, 255, 0.35);
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
+      }
+      .tile {
+        background: rgba(15, 36, 60, 0.65);
+        color: rgba(234, 242, 255, 0.96);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 6px 20px rgba(0, 0, 0, 0.6);
+      }
+      .remember-word-status {
+        background: rgba(8, 23, 42, 0.7);
+        border-color: rgba(145, 201, 255, 0.45);
+        color: #d3e8ff;
+      }
+      .remember-word-tip {
+        color: rgba(198, 214, 230, 0.84);
+      }
+      .site-title,
+      .site-subtitle {
+        color: #fff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1 class="site-title"><span class="cross">✝︎</span> Thoughts &amp; Prayers Foundation</h1>
+      <p class="site-subtitle">Playful journeys that spark hope, faith, and wonder</p>
+    </div>
+    <a class="header-link" href="/">Back to the homepage</a>
+  </header>
+
+  <main>
+    <section class="remember-word-section" aria-labelledby="remember-word-title">
+      <div class="remember-word-card">
+        <div class="remember-word-header">
+          <div>
+            <h2 class="section-title" id="remember-word-title">Remember the Word</h2>
+            <p class="remember-word-lead">
+              A Scripture-inspired memory game without a timer. Watch the lights glow, repeat the pattern, and tend the lamps as you go.
+            </p>
+          </div>
+          <div class="remember-word-stats">
+            <div class="remember-word-stat">
+              <span class="remember-word-label">Round</span>
+              <strong id="rw-round">0</strong>
+            </div>
+            <div class="remember-word-stat">
+              <span class="remember-word-label">Lives</span>
+              <div id="rw-lives" class="lives" aria-live="polite" aria-atomic="true">🕯️🕯️🕯️</div>
+            </div>
+            <div class="remember-word-stat">
+              <span class="remember-word-label">Best</span>
+              <strong id="rw-best">0</strong>
+            </div>
+          </div>
+        </div>
+        <div id="rw-status" class="remember-word-status">Tap "Start" to begin and let the symbols guide you.</div>
+        <div class="tile-grid" id="rw-tile-grid">
+          <button class="tile" data-symbol="cross" data-unlock-round="0" type="button">
+            <span class="tile-icon" aria-hidden="true">✝︎</span>
+            <span class="tile-label">Cross</span>
+          </button>
+          <button class="tile" data-symbol="dove" data-unlock-round="0" type="button">
+            <span class="tile-icon" aria-hidden="true">🕊️</span>
+            <span class="tile-label">Dove</span>
+          </button>
+          <button class="tile" data-symbol="lamp" data-unlock-round="0" type="button">
+            <span class="tile-icon" aria-hidden="true">🕯️</span>
+            <span class="tile-label">Lamp</span>
+          </button>
+          <button class="tile" data-symbol="scroll" data-unlock-round="0" type="button">
+            <span class="tile-icon" aria-hidden="true">📜</span>
+            <span class="tile-label">Scroll</span>
+          </button>
+          <button class="tile tile--locked" data-symbol="fish" data-unlock-round="5" data-unlock-info="Unlocks round 5" disabled type="button">
+            <span class="tile-icon" aria-hidden="true">🐟</span>
+            <span class="tile-label">Fish</span>
+          </button>
+          <button class="tile tile--locked" data-symbol="crown" data-unlock-round="10" data-unlock-info="Unlocks round 10" disabled type="button">
+            <span class="tile-icon" aria-hidden="true">👑</span>
+            <span class="tile-label">Crown</span>
+          </button>
+        </div>
+        <div class="remember-word-footer">
+          <button class="cta-button remember-word-start" id="rw-start-button" type="button">
+            <span aria-hidden="true">🕯️</span>
+            Start Remembering
+          </button>
+          <p class="remember-word-tip">
+            No timer—take the pace of prayer. Each mistake dims a lamp, so breathe and try again.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Thoughts &amp; Prayers Foundation, Inc. All rights reserved.</p>
+    <p>Thoughts &amp; Prayers Foundation Inc. is a registered 501(c)(3) nonprofit organization (EIN 39-4143619).</p>
+    <p>3400 Cottage Way, Ste G2 #30548, Sacramento, CA 95825</p>
+  </footer>
+
+  <script>
+  (function () {
+    const startButton = document.getElementById('rw-start-button');
+    const statusEl = document.getElementById('rw-status');
+    const roundEl = document.getElementById('rw-round');
+    const bestEl = document.getElementById('rw-best');
+    const livesEl = document.getElementById('rw-lives');
+    const tileButtons = Array.from(document.querySelectorAll('#rw-tile-grid .tile'));
+    const tileBySymbol = new Map(tileButtons.map(tile => [tile.dataset.symbol, tile]));
+
+    const TONE_MAP = {
+      cross: 392,
+      dove: 330,
+      lamp: 262,
+      scroll: 294,
+      fish: 349,
+      crown: 440
+    };
+
+    let sequence = [];
+    let playerIndex = 0;
+    let lives = 3;
+    let bestRound = 0;
+    let isPlayerTurn = false;
+    let isSequencing = false;
+    let audioCtx;
+    let pendingTimeout = null;
+    let activeSession = 0;
+    let roundSession = 0;
+
+    function initAudio() {
+      if (audioCtx) {
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return;
+      }
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      } catch (error) {
+        console.warn('Unable to initialize audio context', error);
+      }
+    }
+
+    function playTone(symbol) {
+      if (!symbol) {
+        return;
+      }
+      initAudio();
+      if (!audioCtx) {
+        return;
+      }
+      const frequency = TONE_MAP[symbol] || 330;
+      const oscillator = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      oscillator.type = 'sine';
+      oscillator.frequency.value = frequency;
+      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      oscillator.connect(gain);
+      gain.connect(audioCtx.destination);
+      oscillator.start();
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.35);
+      oscillator.stop(audioCtx.currentTime + 0.35);
+    }
+
+    function wait(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function flashTile(tile, duration = 460) {
+      return new Promise(resolve => {
+        tile.classList.add('tile--active');
+        playTone(tile.dataset.symbol);
+        setTimeout(() => {
+          tile.classList.remove('tile--active');
+          resolve();
+        }, duration);
+      });
+    }
+
+    function updateLivesDisplay() {
+      livesEl.innerHTML = '';
+      const iconCount = Math.max(lives, 0);
+      if (iconCount === 0) {
+        livesEl.textContent = '—';
+        livesEl.setAttribute('aria-label', 'No lives remaining');
+        return;
+      }
+      for (let i = 0; i < iconCount; i += 1) {
+        const span = document.createElement('span');
+        span.className = 'life-icon';
+        span.setAttribute('aria-hidden', 'true');
+        span.textContent = '🕯️';
+        livesEl.appendChild(span);
+      }
+      livesEl.setAttribute('aria-label', `${iconCount} lives remaining`);
+    }
+
+    function refreshUnlockedSymbols() {
+      const roundNumber = sequence.length;
+      tileButtons.forEach(tile => {
+        const required = Number(tile.dataset.unlockRound || 0);
+        if (roundNumber >= required) {
+          tile.disabled = false;
+          tile.classList.remove('tile--locked');
+        } else {
+          tile.disabled = true;
+          tile.classList.add('tile--locked');
+        }
+      });
+    }
+
+    function getAvailableSymbols() {
+      return tileButtons
+        .filter(tile => !tile.disabled)
+        .map(tile => tile.dataset.symbol);
+    }
+
+    function clearPendingTimeout() {
+      if (pendingTimeout) {
+        clearTimeout(pendingTimeout);
+        pendingTimeout = null;
+      }
+    }
+
+    function schedule(fn, delay) {
+      clearPendingTimeout();
+      pendingTimeout = setTimeout(() => {
+        pendingTimeout = null;
+        fn();
+      }, delay);
+    }
+
+    async function playSequence() {
+      const sessionAtStart = roundSession;
+      const snapshot = [...sequence];
+      for (const symbol of snapshot) {
+        if (sessionAtStart !== activeSession) {
+          return;
+        }
+        const tile = tileBySymbol.get(symbol);
+        if (tile) {
+          await flashTile(tile, 520);
+        }
+        if (sessionAtStart !== activeSession) {
+          return;
+        }
+        await wait(160);
+      }
+      if (sessionAtStart !== activeSession) {
+        return;
+      }
+      isSequencing = false;
+      isPlayerTurn = true;
+      statusEl.textContent = 'Now repeat the pattern.';
+    }
+
+    async function startRound() {
+      if (lives <= 0) {
+        return;
+      }
+      refreshUnlockedSymbols();
+      const availableSymbols = getAvailableSymbols();
+      if (!availableSymbols.length) {
+        statusEl.textContent = 'Symbols are still locked. Come back soon.';
+        return;
+      }
+      const nextSymbol = availableSymbols[Math.floor(Math.random() * availableSymbols.length)];
+      sequence.push(nextSymbol);
+      roundSession = activeSession;
+      roundEl.textContent = sequence.length;
+      statusEl.textContent = 'Watch the lights in order.';
+      playerIndex = 0;
+      isPlayerTurn = false;
+      isSequencing = true;
+      await playSequence();
+    }
+
+    function handleSuccess() {
+      if (roundSession !== activeSession) {
+        return;
+      }
+      isPlayerTurn = false;
+      isSequencing = false;
+      if (sequence.length > bestRound) {
+        bestRound = sequence.length;
+        bestEl.textContent = bestRound;
+      }
+      statusEl.textContent = 'Beautiful! The order grows stronger.';
+      schedule(() => {
+        startRound();
+      }, 900);
+    }
+
+    function handleFailure() {
+      if (roundSession !== activeSession) {
+        return;
+      }
+      isPlayerTurn = false;
+      isSequencing = false;
+      clearPendingTimeout();
+      lives = Math.max(lives - 1, 0);
+      updateLivesDisplay();
+      if (lives <= 0) {
+        statusEl.textContent = `Game over. You reached round ${sequence.length}.`;
+        startButton.textContent = 'Try Again';
+        return;
+      }
+      statusEl.textContent = 'That symbol was out of step. Watch the pattern again.';
+      schedule(() => {
+        playerIndex = 0;
+        isSequencing = true;
+        playSequence();
+      }, 900);
+    }
+
+    function startNewGame() {
+      activeSession += 1;
+      sequence = [];
+      playerIndex = 0;
+      lives = 3;
+      isPlayerTurn = false;
+      isSequencing = false;
+      roundEl.textContent = '0';
+      statusEl.textContent = 'A fresh sequence is ready. Prepare your heart.';
+      startButton.textContent = 'Restart Remembering';
+      clearPendingTimeout();
+      updateLivesDisplay();
+      refreshUnlockedSymbols();
+      schedule(() => {
+        startRound();
+      }, 200);
+    }
+
+    tileButtons.forEach(tile => {
+      tile.addEventListener('click', () => {
+        if (isSequencing || !sequence.length || lives <= 0 || tile.disabled) {
+          return;
+        }
+        flashTile(tile, 220);
+        const expected = sequence[playerIndex];
+        if (tile.dataset.symbol === expected) {
+          playerIndex += 1;
+          if (playerIndex === sequence.length) {
+            handleSuccess();
+          }
+        } else {
+          handleFailure();
+        }
+      });
+    });
+
+    startButton.addEventListener('click', () => {
+      initAudio();
+      startNewGame();
+    });
+
+    updateLivesDisplay();
+    refreshUnlockedSymbols();
+  })();
+  </script>
+</body>
+</html>
