@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Remember the Word – Thoughts &amp; Prayers Foundation</title>
+  <title>Learn the Words – Thoughts &amp; Prayers Foundation</title>
 
-  <meta name="description" content="Remember the Word is a calming pattern memory game from Thoughts &amp; Prayers Foundation. Watch the symbols glow, repeat them, and keep the lamps burning.">
+  <meta name="description" content="Learn the Words is a calm, mobile-friendly pattern game. Watch the symbols glow, tap them back, and grow your memory.">
   <link rel="canonical" href="https://thoughtsandprayersfoundation.org/remember-the-word/">
   <meta name="theme-color" content="#3AA0FF">
   <meta name="color-scheme" content="light dark">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Remember the Word">
-  <meta property="og:description" content="Practice Scripture-inspired memory with Remember the Word, a calm pattern game from Thoughts &amp; Prayers Foundation.">
+  <meta property="og:title" content="Learn the Words">
+  <meta property="og:description" content="Practice Scripture-inspired memory with Learn the Words, a calm pattern game from Thoughts &amp; Prayers Foundation.">
   <meta property="og:url" content="https://thoughtsandprayersfoundation.org/remember-the-word/">
   <meta property="og:image" content="https://thoughtsandprayersfoundation.org/assets/og-image.png?v=20250929">
-  <meta property="og:image:alt" content="Remember the Word memory game from Thoughts &amp; Prayers Foundation">
+  <meta property="og:image:alt" content="Learn the Words memory game from Thoughts &amp; Prayers Foundation">
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:title" content="Remember the Word">
+  <meta property="twitter:title" content="Learn the Words">
   <meta property="twitter:description" content="Watch symbols glow, repeat the pattern, and keep the lamps burning in this scripture-inspired memory game.">
   <meta property="twitter:image" content="https://thoughtsandprayersfoundation.org/assets/og-image.png?v=20250929">
 
@@ -47,7 +47,7 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #FFFFFF;
+      background: var(--foam);
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -108,17 +108,19 @@
       letter-spacing: 0.04em;
       text-transform: uppercase;
       font-size: 0.85rem;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 0.55rem 1rem;
+      background: rgba(255, 255, 255, 0.14);
+      padding: 0.55rem 1.05rem;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #0d2c4f;
+      box-shadow: 0 8px 18px rgba(13, 44, 79, 0.14);
     }
     main {
       flex: 1;
       width: 100%;
-      max-width: 900px;
+      max-width: 980px;
       margin: 0 auto;
-      padding: 2.8rem 1.5rem 3rem;
+      padding: 2.6rem 1.25rem 3.2rem;
       display: flex;
       justify-content: center;
     }
@@ -126,11 +128,11 @@
       width: 100%;
     }
     .remember-word-card {
-      background: rgba(255, 255, 255, 0.92);
-      border-radius: 28px;
-      padding: clamp(1.6rem, 3vw, 2.6rem);
-      border: 1px solid rgba(58, 160, 255, 0.35);
-      box-shadow: 0 24px 50px rgba(13, 44, 79, 0.12);
+      background: #fff;
+      border-radius: 24px;
+      padding: clamp(1.6rem, 3vw, 2.4rem);
+      border: 1px solid rgba(58, 160, 255, 0.2);
+      box-shadow: 0 18px 26px rgba(13, 44, 79, 0.08);
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
@@ -146,7 +148,7 @@
       margin: 0;
       max-width: 42ch;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.55;
     }
     .remember-word-stats {
       display: flex;
@@ -181,47 +183,72 @@
     }
     .remember-word-status {
       border-radius: 22px;
-      padding: 1rem 1.1rem;
-      background: rgba(58, 160, 255, 0.08);
-      border: 1px dashed rgba(58, 160, 255, 0.5);
+      padding: 1.1rem 1.15rem;
+      background: rgba(58, 160, 255, 0.1);
+      border: 1px solid rgba(58, 160, 255, 0.25);
       font-weight: 600;
       color: var(--sky-deep);
+      font-size: clamp(0.94rem, 2.4vw, 1rem);
+      line-height: 1.35;
+      height: 4.4rem;
+      display: flex;
+      align-items: center;
     }
     .tile-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1.35rem;
     }
     .tile {
       border: none;
-      border-radius: 20px;
-      padding: 1.3rem 0.65rem;
-      min-height: 120px;
-      background: linear-gradient(180deg, #F5FBFF 0%, #E1F1FF 100%);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 10px 28px rgba(18, 65, 110, 0.12);
+      border-radius: 18px;
+      padding: 1.6rem 1.15rem;
+      min-height: 170px;
+      aspect-ratio: 1;
+      background: #edf5ff;
+      border: 1.5px solid rgba(58, 160, 255, 0.25);
+      box-shadow: 0 12px 24px rgba(18, 65, 110, 0.12);
       color: var(--text);
-      font-size: 1.05rem;
+      font-size: clamp(4.6rem, 16vw, 8rem);
       cursor: pointer;
       display: grid;
       justify-items: center;
-      gap: 0.35rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      align-content: center;
+      gap: 0.55rem;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+      touch-action: manipulation;
+      position: relative;
     }
     .tile:focus-visible {
       outline: 3px solid rgba(58, 160, 255, 0.65);
       outline-offset: 2px;
     }
     .tile-icon {
-      font-size: 1.6rem;
+      font-size: 0.8em;
       line-height: 1;
+      transition: transform 0.18s ease, filter 0.18s ease;
     }
     .tile-label {
-      font-size: 0.95rem;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
     .tile--active {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 12px 22px rgba(13, 44, 79, 0.3);
-      background: linear-gradient(180deg, #ffffff 0%, #d3e9ff 100%);
+      transform: translateY(-3px) scale(1.02);
+      background: #d0e4ff;
+      border-color: rgba(58, 160, 255, 0.65);
+      box-shadow:
+        0 16px 32px rgba(13, 44, 79, 0.28),
+        0 0 0 6px rgba(58, 160, 255, 0.28);
+    }
+    .tile--active .tile-icon {
+      filter: drop-shadow(0 6px 10px rgba(58, 160, 255, 0.35));
     }
     .tile--locked {
       cursor: not-allowed;
@@ -237,20 +264,15 @@
     .remember-word-footer {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.7rem;
       align-items: flex-start;
-    }
-    .remember-word-tip {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
     }
     .cta-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.65rem;
-      padding: 0.95rem 1.9rem;
+      padding: 1rem 1.25rem;
       border-radius: 999px;
       background: linear-gradient(140deg, #3AA0FF 0%, #2F8BEA 100%);
       border: 2px solid transparent;
@@ -261,6 +283,9 @@
       transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
       box-shadow: 0 10px 24px var(--shadow);
       font-family: 'Quicksand', 'Inter', sans-serif;
+      width: 100%;
+      max-width: 460px;
+      font-size: 1.05rem;
     }
     .cta-button:focus-visible,
     .cta-button:hover {
@@ -289,16 +314,17 @@
         text-align: center;
       }
       .remember-word-card {
-        padding: 1.3rem;
+        padding: 1.25rem;
       }
       .tile-grid {
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
       }
       .tile {
-        min-height: 140px;
-        font-size: 1.08rem;
-        padding: 1.4rem 0.65rem;
+        aspect-ratio: unset;
+        min-height: 160px;
+        font-size: clamp(3.2rem, 14vw, 5rem);
+        padding: 1.2rem 0.85rem;
       }
     }
     @media (prefers-color-scheme: dark) {
@@ -308,6 +334,17 @@
       }
       header {
         background: #0D1C34;
+      }
+      .header-link {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.28);
+        color: #e4efff;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      }
+      .header-link:hover,
+      .header-link:focus-visible {
+        background: rgba(255, 255, 255, 0.18);
+        color: #ffffff;
       }
       footer {
         background: linear-gradient(180deg, rgba(15, 46, 75, 0.6) 0%, rgba(5, 18, 32, 0.92) 100%);
@@ -320,9 +357,21 @@
         box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
       }
       .tile {
-        background: rgba(15, 36, 60, 0.65);
+        background: rgba(15, 36, 60, 0.7);
+        border-color: rgba(100, 167, 232, 0.4);
         color: rgba(234, 242, 255, 0.96);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 6px 20px rgba(0, 0, 0, 0.6);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 10px 26px rgba(0, 0, 0, 0.6);
+      }
+      .tile--active {
+        background: rgba(36, 78, 120, 0.9);
+        border-color: rgba(145, 201, 255, 0.8);
+        box-shadow:
+          0 18px 34px rgba(0, 0, 0, 0.7),
+          0 0 0 7px rgba(104, 187, 255, 0.32),
+          0 10px 18px rgba(58, 160, 255, 0.45);
+      }
+      .tile--active .tile-icon {
+        filter: drop-shadow(0 8px 14px rgba(104, 187, 255, 0.5));
       }
       .remember-word-status {
         background: rgba(8, 23, 42, 0.7);
@@ -353,9 +402,9 @@
       <div class="remember-word-card">
         <div class="remember-word-header">
           <div>
-            <h2 class="section-title" id="remember-word-title">Remember the Word</h2>
+            <h2 class="section-title" id="remember-word-title">Learn the Words</h2>
             <p class="remember-word-lead">
-              A Scripture-inspired memory game without a timer. Watch the lights glow, repeat the pattern, and tend the lamps as you go.
+              A calm, tap-friendly memory game. Watch the symbols glow, then tap them in the same order to keep the light going.
             </p>
           </div>
           <div class="remember-word-stats">
@@ -373,7 +422,13 @@
             </div>
           </div>
         </div>
-        <div id="rw-status" class="remember-word-status">Tap "Start" to begin and let the symbols guide you.</div>
+        <div id="rw-status" class="remember-word-status">Tap "Start" to see the pattern, then tap the same symbols to continue.</div>
+        <div class="remember-word-footer">
+          <button class="cta-button remember-word-start" id="rw-start-button" type="button">
+            <span aria-hidden="true">🕯️</span>
+            Start
+          </button>
+        </div>
         <div class="tile-grid" id="rw-tile-grid">
           <button class="tile" data-symbol="cross" data-unlock-round="0" type="button">
             <span class="tile-icon" aria-hidden="true">✝︎</span>
@@ -399,15 +454,6 @@
             <span class="tile-icon" aria-hidden="true">👑</span>
             <span class="tile-label">Crown</span>
           </button>
-        </div>
-        <div class="remember-word-footer">
-          <button class="cta-button remember-word-start" id="rw-start-button" type="button">
-            <span aria-hidden="true">🕯️</span>
-            Start Remembering
-          </button>
-          <p class="remember-word-tip">
-            No timer—take the pace of prayer. Each mistake dims a lamp, so breathe and try again.
-          </p>
         </div>
       </div>
     </section>
@@ -561,19 +607,19 @@
         }
         const tile = tileBySymbol.get(symbol);
         if (tile) {
-          await flashTile(tile, 520);
+          await flashTile(tile, 750);
         }
         if (sessionAtStart !== activeSession) {
           return;
         }
-        await wait(160);
+        await wait(320);
       }
       if (sessionAtStart !== activeSession) {
         return;
       }
       isSequencing = false;
       isPlayerTurn = true;
-      statusEl.textContent = 'Now repeat the pattern.';
+      statusEl.textContent = 'Your turn—tap the symbols in the same order.';
     }
 
     async function startRound() {
@@ -586,11 +632,18 @@
         statusEl.textContent = 'Symbols are still locked. Come back soon.';
         return;
       }
-      const nextSymbol = availableSymbols[Math.floor(Math.random() * availableSymbols.length)];
+      let nextSymbol = availableSymbols[Math.floor(Math.random() * availableSymbols.length)];
+      if (sequence.length && availableSymbols.length > 1) {
+        const last = sequence[sequence.length - 1];
+        const filtered = availableSymbols.filter(symbol => symbol !== last);
+        if (filtered.length) {
+          nextSymbol = filtered[Math.floor(Math.random() * filtered.length)];
+        }
+      }
       sequence.push(nextSymbol);
       roundSession = activeSession;
       roundEl.textContent = sequence.length;
-      statusEl.textContent = 'Watch the lights in order.';
+      statusEl.textContent = 'Watch the pattern in order.';
       playerIndex = 0;
       isPlayerTurn = false;
       isSequencing = true;
@@ -607,7 +660,7 @@
         bestRound = sequence.length;
         bestEl.textContent = bestRound;
       }
-      statusEl.textContent = 'Beautiful! The order grows stronger.';
+      statusEl.textContent = 'Nice work! Get ready for the next pattern.';
       schedule(() => {
         startRound();
       }, 900);
@@ -627,7 +680,7 @@
         startButton.textContent = 'Try Again';
         return;
       }
-      statusEl.textContent = 'That symbol was out of step. Watch the pattern again.';
+      statusEl.textContent = 'Not quite. Watch the pattern again.';
       schedule(() => {
         playerIndex = 0;
         isSequencing = true;
@@ -643,8 +696,8 @@
       isPlayerTurn = false;
       isSequencing = false;
       roundEl.textContent = '0';
-      statusEl.textContent = 'A fresh sequence is ready. Prepare your heart.';
-      startButton.textContent = 'Restart Remembering';
+      statusEl.textContent = 'New game ready. Watch the first pattern.';
+      startButton.textContent = 'Play Again';
       clearPendingTimeout();
       updateLivesDisplay();
       refreshUnlockedSymbols();
