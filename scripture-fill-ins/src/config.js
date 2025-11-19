@@ -1,4 +1,4 @@
-export const BUILD_VERSION = '20251115';
+export const BUILD_VERSION = '20251116';
 
 const VERSES_URL = new URL('./verses.json', import.meta.url);
 

@@ -63,10 +63,8 @@ let shareResetTimer = null;
 const formatShareText = () => {
   const { totalBlanks, correctAnswers, totalPlayed, streak } = state.stats;
   const accuracyPct = totalBlanks === 0 ? 0 : Math.round((correctAnswers / totalBlanks) * 100);
-  const blanksLabel = totalBlanks === 1 ? 'blank' : 'blanks';
-  const versesLabel = totalPlayed === 1 ? 'verse' : 'verses';
   const streakLabel = streak === 1 ? 'day' : 'days';
-  return `${SHARE_URL}\nI’m playing Scripture Fill-Ins. ${accuracyPct}% accuracy across ${totalBlanks} ${blanksLabel} from ${totalPlayed} ${versesLabel}. Current streak: ${streak} ${streakLabel}.`;
+  return `${SHARE_URL}\nScripture Fill-Ins: ${accuracyPct}% accuracy, ${totalPlayed} played, streak ${streak} ${streakLabel}.`;
 };
 
 const resetShareLabel = () => {

@@ -561,10 +561,8 @@
 
     function composeShareText() {
       const currentRound = sequence.length;
-      const bestLine = bestRound > 0 ? `Best round: ${bestRound}.` : 'Building a new best.';
-      const currentLine = currentRound > 0 ? `Reached round ${currentRound}` : 'Just getting started';
-      const livesLine = `${lives} ${lives === 1 ? 'life' : 'lives'} left`;
-      return `${SHARE_URL}\nI’m playing Simon Peter Says. ${currentLine}. ${bestLine} ${livesLine}.`;
+      const bestLine = bestRound > 0 ? `best ${bestRound}` : 'best not set';
+      return `${SHARE_URL}\nSimon Peter Says: game over at round ${currentRound}, ${bestLine}.`;
     }
 
     async function handleShareClick() {

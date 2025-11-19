@@ -108,9 +108,8 @@ const hideFact = () => {
 const composeShareText = () => {
   const difficulty = findDifficulty(state.difficultyId);
   const timeText = formatTime(state.elapsedMs);
-  const headline = `Noah’s Ark: Two by Two`;
-  const stats = `${state.matchedPairs}/${state.totalPairs} pairs • ${state.moves} moves`;
-  return `${headline}\nDifficulty: ${formatDifficultyLabel(difficulty)}\nTime: ${timeText}\n${stats}\n${window.location.href}`;
+  const stats = `${state.matchedPairs}/${state.totalPairs} pairs • ${state.moves} moves • ${timeText}`;
+  return `${window.location.href}\nNoah’s Ark: ${formatDifficultyLabel(difficulty)} — ${stats}`;
 };
 
 const handleShare = async () => {
