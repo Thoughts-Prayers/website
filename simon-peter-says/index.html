@@ -287,6 +287,24 @@
       max-width: 460px;
       font-size: 1.05rem;
     }
+    .cta-button--ghost {
+      background: #fff;
+      color: var(--text);
+      border-color: rgba(58, 160, 255, 0.38);
+      box-shadow: 0 10px 20px var(--shadow);
+    }
+    .share-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      width: 100%;
+      max-width: 460px;
+    }
+    .share-hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
     .cta-button:focus-visible,
     .cta-button:hover {
       transform: translateY(-1px);
@@ -378,6 +396,14 @@
         border-color: rgba(145, 201, 255, 0.45);
         color: #d3e8ff;
       }
+      .cta-button--ghost {
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(240, 244, 250, 0.96);
+        border-color: rgba(255, 255, 255, 0.24);
+      }
+      .share-hint {
+        color: rgba(198, 214, 230, 0.8);
+      }
       .remember-word-tip {
         color: rgba(198, 214, 230, 0.84);
       }
@@ -428,6 +454,13 @@
             <span aria-hidden="true">🕯️</span>
             Start
           </button>
+          <div class="share-block" id="rw-share-block" aria-live="polite" hidden>
+            <button class="cta-button cta-button--ghost" id="rw-share-button" type="button" disabled>
+              <span aria-hidden="true">📤</span>
+              Share progress
+            </button>
+            <p class="share-hint">Share your best round to invite a friend to play.</p>
+          </div>
         </div>
         <div class="tile-grid" id="rw-tile-grid">
           <button class="tile" data-symbol="cross" data-unlock-round="0" type="button">
@@ -472,6 +505,8 @@
     const roundEl = document.getElementById('rw-round');
     const bestEl = document.getElementById('rw-best');
     const livesEl = document.getElementById('rw-lives');
+    const shareBlock = document.getElementById('rw-share-block');
+    const shareButton = document.getElementById('rw-share-button');
     const tileButtons = Array.from(document.querySelectorAll('#rw-tile-grid .tile'));
     const tileBySymbol = new Map(tileButtons.map(tile => [tile.dataset.symbol, tile]));
 
@@ -483,6 +518,8 @@
       fish: 349,
       crown: 440
     };
+    const SHARE_URL = 'https://thoughtsandprayersfoundation.org/simon-peter-says/';
+    const shareDefaultLabel = shareButton ? (shareButton.textContent.trim() || 'Share progress') : 'Share progress';
 
     let sequence = [];
     let playerIndex = 0;
@@ -494,6 +531,74 @@
     let pendingTimeout = null;
     let activeSession = 0;
     let roundSession = 0;
+    let shareResetTimer = null;
+
+    function resetShareLabel() {
+      if (!shareButton) {
+        return;
+      }
+      shareButton.textContent = shareDefaultLabel;
+      if (shareResetTimer) {
+        clearTimeout(shareResetTimer);
+        shareResetTimer = null;
+      }
+    }
+
+    function updateShareState() {
+      if (!shareButton) {
+        return;
+      }
+      const finished = lives <= 0;
+      shareButton.disabled = !finished;
+      shareButton.setAttribute('aria-disabled', shareButton.disabled ? 'true' : 'false');
+      if (shareBlock) {
+        shareBlock.hidden = !finished;
+      }
+      if (!finished) {
+        resetShareLabel();
+      }
+    }
+
+    function composeShareText() {
+      const currentRound = sequence.length;
+      const bestLine = bestRound > 0 ? `Best round: ${bestRound}.` : 'Building a new best.';
+      const currentLine = currentRound > 0 ? `Reached round ${currentRound}` : 'Just getting started';
+      const livesLine = `${lives} ${lives === 1 ? 'life' : 'lives'} left`;
+      return `${SHARE_URL}\nI’m playing Simon Peter Says. ${currentLine}. ${bestLine} ${livesLine}.`;
+    }
+
+    async function handleShareClick() {
+      if (!shareButton || shareButton.disabled) {
+        return;
+      }
+      const shareText = composeShareText();
+      let feedback = '';
+      try {
+        if (navigator.share && (!navigator.canShare || navigator.canShare({ text: shareText }))) {
+          await navigator.share({ text: shareText });
+          feedback = 'Shared!';
+        } else if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+          await navigator.clipboard.writeText(shareText);
+          feedback = 'Copied!';
+        } else {
+          feedback = 'Copy unavailable';
+        }
+      } catch (error) {
+        if (!error || error.name !== 'AbortError') {
+          feedback = 'Try again';
+        }
+      } finally {
+        if (shareButton && feedback) {
+          shareButton.textContent = feedback;
+          if (shareResetTimer) {
+            clearTimeout(shareResetTimer);
+          }
+          shareResetTimer = window.setTimeout(() => {
+            resetShareLabel();
+          }, 1800);
+        }
+      }
+    }
 
     function initAudio() {
       if (audioCtx) {
@@ -643,6 +748,7 @@
       sequence.push(nextSymbol);
       roundSession = activeSession;
       roundEl.textContent = sequence.length;
+      updateShareState();
       statusEl.textContent = 'Watch the pattern in order.';
       playerIndex = 0;
       isPlayerTurn = false;
@@ -676,16 +782,18 @@
       lives = Math.max(lives - 1, 0);
       updateLivesDisplay();
       if (lives <= 0) {
-        statusEl.textContent = `Game over. You reached round ${sequence.length}.`;
-        startButton.textContent = 'Try Again';
-        return;
-      }
+          statusEl.textContent = `Game over. You reached round ${sequence.length}.`;
+          startButton.textContent = 'Try Again';
+          updateShareState();
+          return;
+        }
       statusEl.textContent = 'Not quite. Watch the pattern again.';
       schedule(() => {
         playerIndex = 0;
         isSequencing = true;
         playSequence();
       }, 900);
+      updateShareState();
     }
 
     function startNewGame() {
@@ -700,6 +808,7 @@
       startButton.textContent = 'Play Again';
       clearPendingTimeout();
       updateLivesDisplay();
+      updateShareState();
       refreshUnlockedSymbols();
       schedule(() => {
         startRound();
@@ -729,8 +838,15 @@
       startNewGame();
     });
 
+    if (shareButton) {
+      shareButton.addEventListener('click', () => {
+        handleShareClick();
+      });
+    }
+
     updateLivesDisplay();
     refreshUnlockedSymbols();
+    updateShareState();
   })();
   </script>
 </body>

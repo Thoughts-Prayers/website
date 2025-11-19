@@ -28,8 +28,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles/main.css?v=20251112" />
-  <link rel="stylesheet" href="./styles/dark-mode.css?v=20251112" media="(prefers-color-scheme: dark)" />
+  <link rel="stylesheet" href="./styles/main.css?v=20251115" />
+  <link rel="stylesheet" href="./styles/dark-mode.css?v=20251115" media="(prefers-color-scheme: dark)" />
 </head>
 <body>
   <div class="background-glow" aria-hidden="true"></div>
@@ -61,6 +61,11 @@
     <section class="action-tray">
       <button type="button" id="check-answer" class="action action--primary" disabled>Check answers</button>
       <button type="button" id="next-verse" class="action action--ghost" disabled>Next verse</button>
+    </section>
+
+    <section class="share-block" aria-live="polite" hidden>
+      <button type="button" id="share-progress" class="action action--share" disabled>Share progress</button>
+      <p class="share-hint">Copy your accuracy and streak to invite friends to play along.</p>
     </section>
 
     <section class="tips-deck" aria-label="How to play tips">

@@ -1,6 +1,6 @@
 import {
   BUILD_VERSION,
-  VERSES,
+  loadVerses,
   STORAGE_KEYS,
 } from './config.js';
 
@@ -14,6 +14,8 @@ const dom = {
   accuracy: document.querySelector('#accuracy'),
   versesPlayed: document.querySelector('#verses-played'),
   streak: document.querySelector('#streak'),
+  shareBlock: document.querySelector('.share-block'),
+  shareButton: document.querySelector('#share-progress'),
 };
 
 const loadNumber = (key, fallback = 0) => {
@@ -50,16 +52,93 @@ const state = {
   },
 };
 
+let versePool = [];
+
 const normalize = (value) => (value ?? '').trim().toLowerCase();
 
+const SHARE_URL = 'https://thoughtsandprayersfoundation.org/scripture-fill-ins/';
+const shareDefaultLabel = dom.shareButton ? (dom.shareButton.textContent || 'Share progress') : 'Share progress';
+let shareResetTimer = null;
+
+const formatShareText = () => {
+  const { totalBlanks, correctAnswers, totalPlayed, streak } = state.stats;
+  const accuracyPct = totalBlanks === 0 ? 0 : Math.round((correctAnswers / totalBlanks) * 100);
+  const blanksLabel = totalBlanks === 1 ? 'blank' : 'blanks';
+  const versesLabel = totalPlayed === 1 ? 'verse' : 'verses';
+  const streakLabel = streak === 1 ? 'day' : 'days';
+  return `${SHARE_URL}\nI’m playing Scripture Fill-Ins. ${accuracyPct}% accuracy across ${totalBlanks} ${blanksLabel} from ${totalPlayed} ${versesLabel}. Current streak: ${streak} ${streakLabel}.`;
+};
+
+const resetShareLabel = () => {
+  if (!dom.shareButton) {
+    return;
+  }
+  dom.shareButton.textContent = shareDefaultLabel;
+  if (shareResetTimer) {
+    clearTimeout(shareResetTimer);
+    shareResetTimer = null;
+  }
+};
+
+const updateShareButtonState = () => {
+  if (!dom.shareButton) {
+    return;
+  }
+  const hasProgress = state.stats.totalBlanks > 0 && state.stats.totalPlayed > 0;
+  dom.shareButton.disabled = !hasProgress;
+  dom.shareButton.setAttribute('aria-disabled', dom.shareButton.disabled ? 'true' : 'false');
+  if (dom.shareBlock) {
+    dom.shareBlock.hidden = !hasProgress || !state.revealed;
+  }
+  if (!hasProgress) {
+    resetShareLabel();
+  }
+};
+
+const handleShare = async () => {
+  if (!dom.shareButton || dom.shareButton.disabled) {
+    return;
+  }
+  const shareText = formatShareText();
+  let feedback = '';
+  try {
+    if (navigator.share && (!navigator.canShare || navigator.canShare({ text: shareText }))) {
+      await navigator.share({ text: shareText });
+      feedback = 'Shared!';
+    } else if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      await navigator.clipboard.writeText(shareText);
+      feedback = 'Copied!';
+    } else {
+      feedback = 'Copy unavailable';
+    }
+  } catch (error) {
+    if (!error || error.name !== 'AbortError') {
+      feedback = 'Try again';
+    }
+  } finally {
+    if (dom.shareButton && feedback) {
+      dom.shareButton.textContent = feedback;
+      if (shareResetTimer) {
+        clearTimeout(shareResetTimer);
+      }
+      shareResetTimer = window.setTimeout(() => {
+        resetShareLabel();
+      }, 1800);
+    }
+  }
+};
+
 const pickNextVerse = () => {
+  if (!Array.isArray(versePool) || versePool.length === 0) {
+    return null;
+  }
   const pool =
-    VERSES.length > 1
-      ? VERSES.filter((entry) => entry.id !== state.previousVerseId)
-      : VERSES;
+    versePool.length > 1
+      ? versePool.filter((entry) => entry.id !== state.previousVerseId)
+      : versePool;
   const choice = pool[Math.floor(Math.random() * pool.length)];
-  state.previousVerseId = choice.id;
-  return choice;
+  state.previousVerseId = choice?.id || null;
+  return choice || null;
 };
 
 const updateScoreboard = () => {
@@ -72,6 +151,7 @@ const updateScoreboard = () => {
   }
   dom.versesPlayed.textContent = totalPlayed.toString();
   dom.streak.textContent = streak.toString();
+  updateShareButtonState();
 };
 
 const saveStats = () => {
@@ -213,10 +293,21 @@ const highlightResults = (verse) => {
   updateScoreboard();
   state.revealed = true;
   setActionStates();
+  updateShareButtonState();
 };
 
 const startNextVerse = () => {
-  state.verse = pickNextVerse();
+  const next = pickNextVerse();
+  if (!next) {
+    dom.verseReference.textContent = '—';
+    dom.verseBody.textContent = 'No verses available.';
+    dom.verseMode.textContent = '—';
+    state.verse = null;
+    setActionStates();
+    updateShareButtonState();
+    return;
+  }
+  state.verse = next;
   state.selections = {};
   state.revealed = false;
   renderVerse(state.verse);
@@ -225,6 +316,7 @@ const startNextVerse = () => {
     button.disabled = false;
   });
   setActionStates();
+  updateShareButtonState();
 };
 
 dom.choicesWrapper.addEventListener('click', (event) => {
@@ -251,7 +343,25 @@ dom.nextButton.addEventListener('click', () => {
   startNextVerse();
 });
 
-const init = () => {
+if (dom.shareButton) {
+  dom.shareButton.addEventListener('click', () => {
+    handleShare();
+  });
+}
+
+const init = async () => {
+  try {
+    versePool = await loadVerses();
+  } catch (error) {
+    console.error('Failed to load verses', error);
+    dom.verseReference.textContent = '—';
+    dom.verseBody.textContent = 'Unable to load verses.';
+    dom.verseMode.textContent = '—';
+    dom.checkButton.disabled = true;
+    dom.nextButton.disabled = true;
+    updateShareButtonState();
+    return;
+  }
   updateScoreboard();
   startNextVerse();
 };
