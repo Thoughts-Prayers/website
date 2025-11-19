@@ -5,7 +5,7 @@ import { createPuzzle } from './puzzle-engine.js';
 import { setMoves, clearMoves } from './state.js';
 import { wireUI, setMovesUI, showSolved, resetSolvedUI, setShareResult } from './ui.js';
 
-const BUILD_VERSION = '20250225';
+const BUILD_VERSION = '20250226';
 const VERSION_STORAGE_KEY = 'odb-build-version';
 const GRID_STORAGE_KEY = 'odb-grid-size';
 
@@ -101,7 +101,7 @@ function formatPuzzleLabel(index) {
 
 function formatShareText(moveCount) {
   const movesLabel = moveCount === 1 ? 'move' : 'moves';
-  return `${SHARE_URL}\nI solved Our Daily Bread 🖼️ ${puzzleLabel} (${gridSize}x${gridSize}) in ${moveCount} ${movesLabel}.`;
+  return `${SHARE_URL}\nI solved Our Daily Bread 🖼️ ${puzzleLabel} (${gridSize}x${gridSize}) in ${moveCount} ${movesLabel}`;
 }
 
 function renderMetaLabels() {
