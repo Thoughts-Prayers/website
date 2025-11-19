@@ -19,6 +19,26 @@ ehthumbs.db
 dist/
 build/
 coverage/
+node_modules/
 *.log
+npm-debug.log*
+yarn-error.log*
+*.tmp
 *.map
-our-daily-bread/assets/.DS_Store
+*.swp
+*.swo
+
+# Python tooling
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Environment files
+.env
+.env.*
+
+# Backup files
+*.bak
+*.orig
+*~
